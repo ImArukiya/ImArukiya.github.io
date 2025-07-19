@@ -288,7 +288,7 @@
       /* Hero Section */
       .hero {
         position: relative;
-        background-image: url("Data/bg.png");
+        background-image: url("../bg.png");
         color: var(--light);
         padding: 8rem 2rem;
         text-align: center;
@@ -740,7 +740,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: url("Data/bg.png");
+        background-image: url("../bg.png");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
