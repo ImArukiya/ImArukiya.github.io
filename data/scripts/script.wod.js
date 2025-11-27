@@ -149,26 +149,50 @@ const resultModal = document.getElementById("resultModal");
 const modalResult = document.getElementById("modalResult");
 const closeModal = document.getElementById("closeModal");
 const spinAgain = document.getElementById("spinAgain");
-const spinSound = document.getElementById("spinSound");
-const winSound = document.getElementById("winSound");
+
+// Audio elements - check if they exist before using
+let spinSound = document.getElementById("spinSound");
+let winSound = document.getElementById("winSound");
+
+// If audio elements don't exist, create dummy objects to prevent errors
+if (!spinSound) {
+  spinSound = { currentTime: 0, play: () => {}, pause: () => {} };
+}
+if (!winSound) {
+  winSound = { currentTime: 0, play: () => {}, pause: () => {} };
+}
 
 // Initialize wheel
-renderWheel();
+if (wheel) {
+  renderWheel();
+}
 
 // Event Listeners
-spinButton.addEventListener("click", startSpin);
-closeModal.addEventListener("click", closeResultModal);
-spinAgain.addEventListener("click", closeResultModal);
+if (spinButton) {
+  spinButton.addEventListener("click", startSpin);
+}
+
+if (closeModal) {
+  closeModal.addEventListener("click", closeResultModal);
+}
+
+if (spinAgain) {
+  spinAgain.addEventListener("click", closeResultModal);
+}
 
 // Close modal when clicking outside
-resultModal.addEventListener("click", (e) => {
-  if (e.target === resultModal) {
-    closeResultModal();
-  }
-});
+if (resultModal) {
+  resultModal.addEventListener("click", (e) => {
+    if (e.target === resultModal) {
+      closeResultModal();
+    }
+  });
+}
 
 // Functions
 function renderWheel() {
+  if (!wheel) return;
+  
   wheel.innerHTML = "";
 
   // Colors for red, spin-again, and blue
@@ -212,6 +236,8 @@ function renderWheel() {
 }
 
 function addSectionLabel(text, angle, color, isSmall = false) {
+  if (!wheel) return;
+  
   const label = document.createElement("div");
   label.className = "section-label";
   label.textContent = text;
@@ -226,10 +252,12 @@ function addSectionLabel(text, angle, color, isSmall = false) {
 }
 
 function startSpin() {
-  if (isSpinning) return;
+  if (isSpinning || !wheel) return;
 
   isSpinning = true;
-  spinButton.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
+  if (spinButton) {
+    spinButton.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
+  }
 
   // Play spin sound
   spinSound.currentTime = 0;
@@ -248,7 +276,9 @@ function animateSpin(currentTime = performance.now()) {
 
   // Apply rotation
   currentRotation += spinVelocity;
-  wheel.style.transform = `rotate(${currentRotation}deg)`;
+  if (wheel) {
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+  }
 
   // Apply deceleration
   const progress = Math.min(elapsed / totalSpinDuration, 1);
@@ -265,7 +295,9 @@ function animateSpin(currentTime = performance.now()) {
 
 function finishSpin() {
   isSpinning = false;
-  spinButton.innerHTML = '<i class="fas fa-play"></i>';
+  if (spinButton) {
+    spinButton.innerHTML = '<i class="fas fa-play"></i>';
+  }
 
   // Calculate winner based on final rotation
   const normalizedRotation = (360 - (currentRotation % 360)) % 360;
@@ -274,6 +306,7 @@ function finishSpin() {
   let isSpinAgain = false;
   let outcomeText = "";
   lastWinner = winner;
+  
   // Check if pointer landed on spin again section (1% chance area)
   // Spin again section spans from spinAgainAngle to spinAgainAngle + 3.6 degrees
   const spinAgainStart = spinAgainAngle;
@@ -314,27 +347,33 @@ function finishSpin() {
 
     // Show result in modal
     if (isSpinAgain) {
-      modalResult.textContent = `${winner}`;
-      modalResult.style.background =
-        "linear-gradient(135deg, #10B981, #34D399)";
+      if (modalResult) {
+        modalResult.textContent = `${winner}`;
+        modalResult.style.background =
+          "linear-gradient(135deg, #10B981, #34D399)";
+      }
 
       // Add special message for spin again
-      document.querySelector(".modal-title").textContent =
-        "The Wheel Demands Another Spin!";
-      document.querySelector(".modal-content p").textContent =
-        "Fate isn't done with you yet!";
+      const modalTitle = document.querySelector(".modal-title");
+      const modalContent = document.querySelector(".modal-content p");
+      if (modalTitle) modalTitle.textContent = "The Wheel Demands Another Spin!";
+      if (modalContent) modalContent.textContent = "Fate isn't done with you yet!";
     } else {
-      modalResult.textContent = `${winner} (${outcomeText})`;
-      modalResult.style.background = "var(--gradient-accent)";
+      if (modalResult) {
+        modalResult.textContent = `${winner} (${outcomeText})`;
+        modalResult.style.background = "var(--gradient-accent)";
+      }
 
       // Reset modal text for normal outcomes
-      document.querySelector(".modal-title").textContent =
-        "The Wheel Has Spoken!";
-      document.querySelector(".modal-content p").textContent =
-        "The battle outcome is:";
+      const modalTitle = document.querySelector(".modal-title");
+      const modalContent = document.querySelector(".modal-content p");
+      if (modalTitle) modalTitle.textContent = "The Wheel Has Spoken!";
+      if (modalContent) modalContent.textContent = "The battle outcome is:";
     }
 
-    resultModal.style.display = "flex";
+    if (resultModal) {
+      resultModal.style.display = "flex";
+    }
 
     // Create confetti effect
     createConfetti();
@@ -350,7 +389,9 @@ function replaceTags(str, winner) {
 }
 
 function closeResultModal() {
-  resultModal.style.display = "none";
+  if (resultModal) {
+    resultModal.style.display = "none";
+  }
 
   // Re-render wheel with new random configuration for next spin
   renderWheel();
@@ -395,14 +436,19 @@ function createConfetti() {
 // Navbar scroll effect
 window.addEventListener("scroll", () => {
   const navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
+  if (navbar) {
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
   }
 });
 
-// Back to top button
-document.querySelector(".back-to-top").addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+// Back to top button - only add if element exists
+const backToTop = document.querySelector(".back-to-top");
+if (backToTop) {
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
