@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wheel of Doom - Red vs Blue Edition</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Dark Theme Variables */
+      :root {
+        --primary-color: #f59e0b;
+        --primary-light: #fbbf24;
+        --primary-dark: #fbbf24;
+        --secondary-color: #1e293b;
+        --accent-color: #f59e0b;
+        --accent-light: #fbbf24;
+
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --text-white: #ffffff;
+
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-card: #1e293b;
+        --bg-surface: #334155;
+
+        --border-color: #334155;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --shadow: 0 4px 6px -1px var(--shadow-color),
+          0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 10px 15px -3px var(--shadow-color),
+          0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        --shadow-xl: 0 20px 25px -5px var(--shadow-color),
+          0 10px 10px -5px rgba(0, 0, 0, 0.3);
+
+        --radius: 12px;
+        --transition: all 0.3s ease;
+        --gradient-primary: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-dark)
+        );
+        --gradient-accent: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--accent-light)
+        );
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background-color: var(--bg-primary);
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Navigation */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        z-index: 1000;
+        transition: var(--transition);
+        background-color: transparent;
+      }
+
+      .navbar.scrolled {
+        background-color: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow);
+        padding: 0.7rem 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .nav-link:hover {
+        color: var(--primary-light);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: var(--transition);
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-logo {
+        background-color: white;
+        mask: url(/data/svg/TSDR.svg) center/contain no-repeat;
+        -webkit-mask: url(/data/svg/TSDR.svg) center/contain no-repeat;
+        display: flex;
+        justify-content: center;
+      }
+
+      .profile-img {
+        width: 70px;
+        height: 70px;
+        background-color: rgb(255, 255, 255);
+        mask: url(/data/svg/TSDR.svg) center/contain no-repeat;
+        -webkit-mask: url(/data/svg/TSDR.svg) center/contain no-repeat;
+        object-fit: cover;
+        transition: background-color 0.5s ease;
+      }
+
+      .profile-img:hover {
+        background-color: gold;
+      }
+
+      .navbar.scrolled .profile-img {
+        width: 50px;
+        height: 50px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        color: var(--text-primary);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .btn-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+        border-color: var(--primary-light);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding-top: 100px;
+        padding-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .page-title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+        color: var(--text-primary);
+      }
+
+      .page-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+      }
+
+      .page-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        color: var(--text-secondary);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Wheel Container */
+      .wheel-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .wheel-wrapper {
+        position: relative;
+        width: 500px;
+        height: 500px;
+      }
+
+      .wheel {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+        border: 8px solid var(--bg-surface);
+        transition: transform 0.1s linear;
+      }
+
+      .wheel-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        z-index: 10;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        border: 4px solid var(--bg-surface);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .wheel-center:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .wheel-pointer {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 80px;
+        background: var(--accent-color);
+        clip-path: polygon(50% 100%, 0 0, 100% 0);
+        z-index: 5;
+        box-shadow: var(--shadow);
+        filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.5));
+      }
+
+      .wheel-stand {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 60px;
+        background: linear-gradient(to bottom, #64748b, #475569);
+        z-index: 1;
+      }
+
+      .wheel-stand-base {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 20px;
+        background: linear-gradient(to bottom, #475569, #334155);
+        border-radius: 10px;
+        z-index: 1;
+      }
+
+      /* Section Labels */
+      .section-label {
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform-origin: center;
+        width: 80%;
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-white);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        font-size: 1.2rem;
+        padding: 5px;
+        z-index: 2;
+      }
+
+      /* Popup Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background: var(--bg-card);
+        border-radius: var(--radius);
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: var(--shadow-xl);
+        border: 1px solid var(--border-color);
+        position: relative;
+        animation: modalAppear 0.5s ease-out;
+      }
+
+      @keyframes modalAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.8) translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .modal-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .modal-result {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        background: var(--gradient-accent);
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .modal-close:hover {
+        color: var(--text-primary);
+        transform: scale(1.1);
+      }
+
+      /* Footer */
+      .footer {
+        padding-top: 2rem;
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+        border-top: 1px solid var(--border-color);
+        margin-top: auto;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 3rem;
+        padding-bottom: 2rem;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        color: var(--text-primary);
+      }
+
+      .footer-column p {
+        margin-bottom: 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--bg-surface);
+        color: var(--text-primary);
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .social-links a:hover {
+        background: var(--gradient-primary);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: var(--shadow);
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-column ul li a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-column ul li a:hover {
+        color: var(--primary-light);
+        padding-left: 5px;
+      }
+
+      .footer-column ul li i {
+        margin-right: 0.5rem;
+        width: 20px;
+        color: var(--primary-light);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid var(--border-color);
+        padding: 1.5rem 0;
+        position: relative;
+      }
+
+      .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom p {
+        color: var(--text-muted);
+      }
+
+      .back-to-top {
+        position: absolute;
+        right: 20px;
+        top: -25px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      /* Confetti */
+      .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .wheel-wrapper {
+          width: 350px;
+          height: 350px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .section-label {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .wheel-wrapper {
+          width: 300px;
+          height: 300px;
+        }
+
+        .page-title {
+          font-size: 2.5rem;
+        }
+
+        .section-label {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <img src="data/svg/TSDR.png" alt="Profile" class="profile-img" />
+        </div>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link"
+            ><i class="fas fa-home"></i> Home</a
+          >
+          <a href="#" class="nav-link"
+            ><i class="fas fa-dice"></i> Wheel of Doom</a
+          >
+          <a href="https://linktr.ee/Im_frans" target="_blank" class="nav-link"
+            ><i class="fas fa-video"></i> Linktree</a
+          >
+        </div>
+        <div class="nav-buttons">
+          <button class="btn btn-secondary">
+            <i class="fab fa-twitch"></i> Follow
+          </button>
+          <button class="btn btn-primary">
+            <i class="fas fa-bell"></i> Subscribe
+          </button>
+          <button
+            href="https://dsc.gg/tsrd"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            <i class="fab fa-discord"></i>Join discord
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <h1 class="page-title">Wheel of Doom</h1>
+        <p class="page-subtitle">
+          Red vs Blue - The Ultimate Anime Battle Edition
+        </p>
+
+        <div class="wheel-container">
+          <div class="wheel-wrapper">
+            <div class="wheel" id="wheel"></div>
+            <div class="wheel-center" id="spinButton">
+              <i class="fas fa-play"></i>
+            </div>
+            <div class="wheel-pointer"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Result Modal -->
+    <div class="modal" id="resultModal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+        <h2 class="modal-title">The Wheel Has Spoken!</h2>
+        <p>The battle outcome is:</p>
+        <div class="modal-result" id="modalResult"></div>
+        <p>Prepare for the consequences!</p>
+        <button
+          class="btn btn-primary"
+          id="spinAgain"
+          style="margin-top: 1.5rem"
+        >
+          <i class="fas fa-sync-alt"></i> Spin Again
+        </button>
+      </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio
+      id="spinSound"
+      src="https://assets.mixkit.co/sfx/preview/mixkit-game-show-spin-woosh-308.mp3"
+    ></audio>
+    <audio
+      id="winSound"
+      src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"
+    ></audio>
+
+    <script>
+      let lastWinner = null;
+      // Random outcome generator function
+      function random(winner) {
+        const outcomes = [
+          "{loser} DEFEATED — PROTAGONIST DESTINY ACTIVATED",
+          "{loser} ERASED FROM THE TIMELINE",
+          "MAIN CHARACTER ENERGY — {loser} = BACKGROUND DECORATION",
+          "SHONEN LAW: PROTAGONIST VICTORY GUARANTEED",
+          "PLOT HOLE — THIS OUTCOME MAKES NO SENSE",
+          "FINAL ATTACK CONNECTS — {loser}'S JOURNEY ENDS",
+          "HERO'S RESOLVE — {loser} = MERE OBSTACLE",
+          "CHARACTER DATA CORRUPTED",
+          "{loser}'S CLONE STILL SUFFERED DEFEAT",
+          "INTERRUPTED MID-TRANSFORMATION SEQUENCE",
+          "MUTUAL KNOCKOUT — ANIMATION BUDGET DEPLETED",
+          "EXTREME DIFFICULTY — {loser} ONLY POSTPONED FATE",
+          "ULTIMATE EVOLUTION — {loser} NEVER HAD A CHANCE",
+          "BLITZED — TOO SLOW FOR COMBAT PREDICTION",
+          "MINIMAL EFFORT — NO POWER-UP REQUIRED",
+          "LEGENDARY BATTLE THEME — {loser}'S TRACK FORGOTTEN",
+          "TRAINING COMPLETE — {loser} REMAINS WEAK",
+          "EVEN SIDEKICK OUTMATCHED {loser}",
+          "MODERATE CHALLENGE — STILL VICTORIOUS",
+          "SUPPORTING CAST MEMBER SURPASSED {loser}",
+          "{loser}'S FANS ABANDONED SHIP MID-BATTLE",
+          "EFFORTLESS VICTORY — {loser}'S STORY CANCELLED",
+          "NARRATOR BENCHED {loser}",
+          "{loser}'S POWER LEVEL INCONSEQUENTIAL",
+          "{loser}'S BATTLE AURA FAILED TO ACTIVATE",
+          "NOT WORTHY OF HEALTH BAR DISPLAY",
+          "TWIST ENDING — VICTORY INDETERMINATE, AUDIENCE BAFFLED",
+          "SHONEN DEADLOCK — POWER-UPS MUTUALLY NULLIFIED",
+          "{loser} = PERPETUAL BACKGROUND FIGURE",
+          "ABSOLUTE SUPREMACY — NO DEFENSE POSSIBLE",
+          "EVOLUTION INTERRUPTED — VICTORY SECURED REGARDLESS",
+          "{loser}'S ENTIRE CLAN FEELS THE SHAME",
+          "{loser}'S SAGA >>> PROTAGONIST'S JOURNEY",
+          "MAIN CHARACTER ARC >>> {loser}'S DEVELOPMENT",
+          "REWIND EPISODE — REMATCH MANDATORY",
+          "{loser} FAILED AWARENESS CHECK",
+          "ANIME TROPE DICTATES YOUR DEFEAT",
+          "VICTORY DETERMINED IN STORYBOARD PHASE",
+          "TECHNICAL DEFICIENCY FOR {loser}",
+          "TRIUMPHANT EVEN IN RECAP SPECIAL",
+          "INTENSE STRUGGLE — BUT {loser} POSED NO REAL DANGER",
+          "EVEN SHADOW CLONE OVERPOWERED {loser}",
+          "DEFEATED DURING EMOTIONAL FLASHBACK",
+          "FINAL FORM NERFED IN LATEST PATCH",
+          "{loser} ANIMATED WITH MINIMAL BUDGET",
+          "ABSOLUTELY EFFORTLESS — NO BATTLE THEME AUDIBLE",
+          "VICTORY ACHIEVED PRE-COMMERCIAL",
+          "{loser}'S TRAGIC BACKSTORY PROVED IRRELEVANT",
+          "DOMINATED ACROSS ALL SAGAS",
+          "REROLL DESTINY — COSMIC BALANCE UNDECIDED",
+          "PLOT CONTRIVANCE SEALED FATE",
+          "{loser}'S LEGACY REDUCED TO THIS MOMENT",
+          "{loser} NEVER ADVANCED BEYOND APPRENTICE STAGE",
+          "{loser} OVERWHELMED BY SUDDEN EVOLUTION",
+          "COMBAT PRECISION FAILED — ALL ATTACKS MISSED",
+          "WRITTEN OUT OF NEXT SAGA",
+          "MODERATE EFFORT — {loser} STILL OVERWHELMED",
+          "TRAGIC DIFFICULTY — {loser} ANNIHILATED",
+          "{loser}'S VELOCITY INSUFFICIENT FOR COMBAT",
+          "SWEPT BEFORE OPENING CREDITS",
+          "IMPOSSIBLE ODDS — AND STILL EMERGED VICTORIOUS",
+          "EXTREME CHALLENGE — SOLELY DUE TO {loser}'S EVASION",
+          "SINGLE BLOW FINISH — {loser} UNABLE TO RESPOND",
+          "BATTLE THEME INDUCES SLUMBER",
+          "THREE-SECOND KNOCKOUT",
+          "EVEN BASE FORM SUFFICIENT FOR VICTORY",
+          "WEAPON SHATTERED ON IMPACT",
+          "CANONICAL EVENT: {loser} SUCCUMBS",
+          "EFFORTLESS — {loser} LACKS HERO QUALITIES",
+          "INTENSE STRUGGLE — BUT {loser} UNSUITED FOR BATTLE MANGA",
+          "NEGLIGIBLE EFFORT — SIDE CHARACTER VIBES",
+          "{loser} OBLITERATED BY NARRATIVE DEMANDS",
+          "VICTORY SCRIPTED AS CUTSCENE",
+          "{loser}'S ULTIMATE FORM PROVED FUTILE",
+          "THE TYPE TO BE DEFEATED OFF-SCREEN",
+          "MINIMAL CHALLENGE — {loser} = TRAINING DUMMY",
+          "SHONEN PRINCIPLE: TRUE HERO PREVAILS",
+          "STORY FROZEN — BOTH COMBATANTS NERFED",
+          "FANBASE TRANSFERRED ALLEGIANCE MID-CONFLICT",
+          "PERMANENTLY CONCLUDED {loser}'S STORY ARC",
+          "INSUFFICIENT DRAMA FOR MID-SEASON CLIMAX",
+          "SUPREME TECHNIQUE EXECUTED — {loser} DISINTEGRATED",
+          "DIVINE-LEVEL CONFLICT — HERO ASCENDED, {loser} FELL",
+          "PERMANENT DEFEAT — NO SAVE POINT AVAILABLE",
+          "ULTIMATE FORM UNNECESSARY",
+          "PLOT ARMOR COMPROMISED — {loser} FINISHED",
+          "{loser} UPDATED — STILL MEDIOCRE",
+          "MERELY A SIDE MISSION FOR THE HERO",
+          "IMPOSSIBLE CHALLENGE — PERFECT VICTORY ACHIEVED",
+          "INADEQUATE FOR FILLER STORYLINE",
+          "BLADE SHATTERED UPON CONTACT",
+          "STALEMATE SAGA — BOTH THEMES ABRUPTLY CUT",
+          "DESTINY DECREES RETRY — RESET TIMELINE",
+          "MINIMAL RESISTANCE — BARELY A WARM-UP",
+          "{loser} DEFEATED IN STORYBOARD STAGE",
+          "POWER SCALING DISFAVORS {loser}",
+          "{loser} CANNOT WITHSTAND TRUE BATTLE MANGA INTENSITY",
+          "{loser}'S CHARACTER GROWTH STUNTED",
+          "TRIUMPHANT DESPITE {loser}'S FLASHBACK POWER SURGE",
+          "NO SUMMONS USED — PURE MARTIAL PROWESS",
+          "EFFORTLESS — {loser} FAILED TO APPEAR IN MANGA PANELS",
+          "WORST PERFORMANCE OF HERO'S CAREER",
+          "DEFEATED DURING OPENING SEQUENCE",
+          "GOD-TIER CONFLICT — {loser} CONQUERED MULTIPLE DIMENSIONS",
+          "SINGLE STRIKE FINISH — ACCEPT DEFEAT",
+          "HIGH-MODERATE DIFFICULTY — BUT {loser} ULTIMATELY FELL",
+          "ELIMINATED IN FILLER EPISODE",
+          "IMPROVE POWER SYSTEM IN NEXT REINCARNATION",
+          "COSMIC-LEVEL STRUGGLE — {loser} EXPUNGED FROM EXISTENCE",
+        ];
+
+        const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+        return replaceTags(outcome, winner);
+      }
+
+      // Battle outcomes array
+      const battleOutcomes = ["red", "blue"];
+      const spinAgainOptions = [
+        "SPIN AGAIN",
+        "REROLL DESTINY",
+        "TRY YOUR LUCK",
+        "ANOTHER SPIN",
+        "FATE DEMANDS MORE",
+        "DOUBLE OR NOTHING",
+        "SPINCEPTION",
+        "WHEEL OF FATE CALLS",
+        "ANOTHER CHANCE",
+        "DESTINY REROLL",
+      ];
+
+      let isSpinning = false;
+      let currentRotation = 0;
+      let spinVelocity = 0;
+      let animationId = null;
+      let startTime = 0;
+      let totalSpinDuration = 5000;
+      let hasSpinAgainSection = false;
+      let spinAgainIndex = -1;
+      let spinAgainAngle = 0;
+
+      // DOM Elements
+      const wheel = document.getElementById("wheel");
+      const spinButton = document.getElementById("spinButton");
+      const resultModal = document.getElementById("resultModal");
+      const modalResult = document.getElementById("modalResult");
+      const closeModal = document.getElementById("closeModal");
+      const spinAgain = document.getElementById("spinAgain");
+      const spinSound = document.getElementById("spinSound");
+      const winSound = document.getElementById("winSound");
+
+      // Initialize wheel
+      renderWheel();
+
+      // Event Listeners
+      spinButton.addEventListener("click", startSpin);
+      closeModal.addEventListener("click", closeResultModal);
+      spinAgain.addEventListener("click", closeResultModal);
+
+      // Close modal when clicking outside
+      resultModal.addEventListener("click", (e) => {
+        if (e.target === resultModal) {
+          closeResultModal();
+        }
+      });
+
+      // Functions
+      function renderWheel() {
+        wheel.innerHTML = "";
+
+        // Colors for red, spin-again, and blue
+        const redColor = "#FF6B6B";
+        const blueColor = "#3A86FF";
+        const spinAgainColor = "#10B981";
+
+        // Calculate angles - spin again gets 1% (3.6 degrees), red and blue share the rest
+        const totalDegrees = 360;
+        const spinAgainDegrees = 3.6; // 1% of 360
+        const remainingDegrees = totalDegrees - spinAgainDegrees;
+        const redBlueDegrees = remainingDegrees / 2; // Split remaining between red and blue
+
+        // Create the wheel using a single conic-gradient
+        const gradient = `conic-gradient(
+          ${redColor} 0deg ${redBlueDegrees}deg,
+          ${spinAgainColor} ${redBlueDegrees}deg ${
+          redBlueDegrees + spinAgainDegrees
+        }deg,
+          ${blueColor} ${redBlueDegrees + spinAgainDegrees}deg 360deg
+        )`;
+
+        wheel.style.background = gradient;
+
+        // Add labels for each section
+        addSectionLabel("RED", redBlueDegrees / 2, redColor);
+        addSectionLabel(
+          spinAgainOptions[Math.floor(Math.random() * spinAgainOptions.length)],
+          redBlueDegrees + spinAgainDegrees / 2,
+          spinAgainColor,
+          true
+        );
+        addSectionLabel(
+          "BLUE",
+          redBlueDegrees + spinAgainDegrees + redBlueDegrees / 2,
+          blueColor
+        );
+
+        // Store the angles for determining the result
+        spinAgainAngle = redBlueDegrees;
+      }
+
+      function addSectionLabel(text, angle, color, isSmall = false) {
+        const label = document.createElement("div");
+        label.className = "section-label";
+        label.textContent = text;
+        label.style.transform = `rotate(${angle}deg)`;
+
+        if (isSmall) {
+          label.style.fontSize = "0.7rem";
+          label.style.bottom = "10px";
+        }
+
+        wheel.appendChild(label);
+      }
+
+      function startSpin() {
+        if (isSpinning) return;
+
+        isSpinning = true;
+        spinButton.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
+
+        // Play spin sound
+        spinSound.currentTime = 0;
+        spinSound.play();
+
+        // Set initial velocity
+        spinVelocity = 30 + Math.random() * 20;
+        startTime = performance.now();
+
+        // Start animation
+        animateSpin();
+      }
+
+      function animateSpin(currentTime = performance.now()) {
+        const elapsed = currentTime - startTime;
+
+        // Apply rotation
+        currentRotation += spinVelocity;
+        wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+        // Apply deceleration
+        const progress = Math.min(elapsed / totalSpinDuration, 1);
+        spinVelocity = 50 * (1 - progress) * (1 - progress);
+
+        // Continue animation if still spinning
+        if (progress < 1) {
+          animationId = requestAnimationFrame(animateSpin);
+        } else {
+          // Spin complete
+          finishSpin();
+        }
+      }
+
+      function finishSpin() {
+        isSpinning = false;
+        spinButton.innerHTML = '<i class="fas fa-play"></i>';
+
+        // Calculate winner based on final rotation
+        const normalizedRotation = (360 - (currentRotation % 360)) % 360;
+
+        let winner;
+        let isSpinAgain = false;
+        let outcomeText = "";
+        lastWinner = winner;
+        // Check if pointer landed on spin again section (1% chance area)
+        // Spin again section spans from spinAgainAngle to spinAgainAngle + 3.6 degrees
+        const spinAgainStart = spinAgainAngle;
+        const spinAgainEnd = (spinAgainAngle + 3.6) % 360;
+
+        if (spinAgainEnd > spinAgainStart) {
+          // Normal case: section doesn't wrap around 360
+          isSpinAgain =
+            normalizedRotation >= spinAgainStart &&
+            normalizedRotation < spinAgainEnd;
+        } else {
+          // Case where section wraps around 360
+          isSpinAgain =
+            normalizedRotation >= spinAgainStart ||
+            normalizedRotation < spinAgainEnd;
+        }
+
+        if (isSpinAgain) {
+          winner = "SPIN AGAIN!";
+        } else {
+          // Determine if it's red or blue (split the remaining 99%)
+          const redStart = 0;
+          const redEnd = 178.2; // 49.5% of 360
+          const blueStart = 181.8; // After spin again section (49.5% + 1% = 50.5% start)
+          const blueEnd = 360;
+
+          if (normalizedRotation >= redStart && normalizedRotation < redEnd) {
+            winner = "red";
+          } else {
+            winner = "blue";
+          }
+          outcomeText = random(winner);
+        }
+
+        // Small delay before showing result
+        setTimeout(() => {
+          // Play win sound
+          winSound.currentTime = 0;
+          winSound.play();
+
+          // Show result in modal
+          if (isSpinAgain) {
+            modalResult.textContent = `${winner}`;
+            modalResult.style.background =
+              "linear-gradient(135deg, #10B981, #34D399)";
+
+            // Add special message for spin again
+            document.querySelector(".modal-title").textContent =
+              "The Wheel Demands Another Spin!";
+            document.querySelector(".modal-content p").textContent =
+              "Fate isn't done with you yet!";
+          } else {
+            modalResult.textContent = `${winner} (${outcomeText})`;
+            modalResult.style.background = "var(--gradient-accent)";
+
+            // Reset modal text for normal outcomes
+            document.querySelector(".modal-title").textContent =
+              "The Wheel Has Spoken!";
+            document.querySelector(".modal-content p").textContent =
+              "The battle outcome is:";
+          }
+
+          resultModal.style.display = "flex";
+
+          // Create confetti effect
+          createConfetti();
+        }, 500);
+      }
+
+      function replaceTags(str, winner) {
+        if (!winner) return str;
+
+        const loser = winner === "red" ? "BLUE" : "RED";
+
+        return str.replaceAll("{winner}", winner).replaceAll("{loser}", loser);
+      }
+
+      function closeResultModal() {
+        resultModal.style.display = "none";
+
+        // Re-render wheel with new random configuration for next spin
+        renderWheel();
+      }
+
+      function createConfetti() {
+        const colors = ["#f59e0b", "#ec4899", "#6366f1", "#10b981", "#3b82f6"];
+
+        for (let i = 0; i < 100; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.opacity = "1";
+
+          document.body.appendChild(confetti);
+
+          // Animate confetti
+          const animation = confetti.animate(
+            [
+              { transform: "translateY(0) rotate(0deg)", opacity: 1 },
+              {
+                transform: `translateY(${window.innerHeight}px) rotate(${
+                  360 + Math.random() * 360
+                }deg)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 1000 + Math.random() * 2000,
+              easing: "cubic-bezier(0.1, 0.8, 0.2, 1)",
+            }
+          );
+
+          animation.onfinish = () => {
+            confetti.remove();
+          };
+        }
+      }
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Back to top button
+      document.querySelector(".back-to-top").addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>
