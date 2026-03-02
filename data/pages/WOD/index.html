@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FransMT07 - Wheel of Destiny</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="shortcut icon" href="data/ico/fransmt.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-links">
+          <a href="#home" class="nav-link"
+            ><i class="fas fa-home"></i> <span>Home</span></a
+          >
+          <a href="#" class="nav-link active"
+            ><i class="fas fa-dice-d20"></i> <span>Wheel of Doom</span></a
+          >
+          <a href="https://linktr.ee/Im_frans" target="_blank" class="nav-link"
+            ><i class="fas fa-link"></i> <span>Linktree</span></a
+          >
+        </div>
+
+        <div class="nav-logo">
+          <img src="../../img/SDR.png" alt="Profile" class="profile-img" />
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-primary">
+            <i class="fas fa-bell"></i> Subscribe
+          </button>
+          <button class="btn btn-secondary">
+            <i class="fab fa-twitch"></i> Follow
+          </button>
+          <button class="btn btn-secondary">
+            <i class="fab fa-discord"></i> Join
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="dashboard">
+        <!-- Left Side - Wheel Section -->
+        <div class="wheel-section">
+          <div class="section-header">
+            <h1 class="wheel-title">WHEEL OF <span>DOOM</span></h1>
+            <p class="wheel-subtitle">
+              Spin the wheel and let fate decide the battle's outcome
+            </p>
+          </div>
+
+          <div class="wheel-container">
+            <div class="wheel-wrapper">
+              <div class="wheel-glow"></div>
+              <div class="wheel" id="wheel"></div>
+              <div class="wheel-center" id="spinButton">
+                <i class="fas fa-play"></i>
+              </div>
+              <div class="wheel-pointer">
+                <div class="pointer-base"></div>
+              </div>
+            </div>
+
+            <div class="wheel-controls">
+              <button class="control-btn" id="resetStatsBtn">
+                <i class="fas fa-redo-alt"></i> Reset Stats
+              </button>
+              <div class="spin-hint">
+                <i class="fas fa-keyboard"></i> Press <kbd>SPACE</kbd> to spin
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side - Stats Panel -->
+        <div class="stats-panel">
+          <div class="panel-header">
+            <h2><i class="fas fa-chart-line"></i> Battle Statistics</h2>
+            <div class="header-decoration"></div>
+          </div>
+
+          <!-- Main Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card red" id="redStatCard">
+              <div class="stat-icon">
+                <i class="fas fa-skull"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">RED VICTORIES</div>
+                <div class="stat-value" id="redCount">0</div>
+                <div class="stat-progress">
+                  <div
+                    class="progress-bar"
+                    id="redProgress"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div class="stat-glow"></div>
+            </div>
+
+            <div class="stat-card blue" id="blueStatCard">
+              <div class="stat-icon">
+                <i class="fas fa-dragon"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">BLUE VICTORIES</div>
+                <div class="stat-value" id="blueCount">0</div>
+                <div class="stat-progress">
+                  <div
+                    class="progress-bar"
+                    id="blueProgress"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div class="stat-glow"></div>
+            </div>
+
+            <div class="stat-card spin" id="spinStatCard">
+              <div class="stat-icon">
+                <i class="fas fa-redo-alt"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">SPIN AGAIN</div>
+                <div class="stat-value" id="spinCount">0</div>
+                <div class="stat-progress">
+                  <div
+                    class="progress-bar"
+                    id="spinProgress"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div class="stat-glow"></div>
+            </div>
+          </div>
+
+          <!-- Total Spins -->
+          <div class="total-spins-card">
+            <div class="total-spins-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="total-spins-content">
+              <div class="total-spins-label">TOTAL SPINS</div>
+              <div class="total-spins-value" id="totalSpins">0</div>
+            </div>
+          </div>
+
+          <!-- Recent History -->
+          <div class="history-section">
+            <div class="history-header">
+              <h3><i class="fas fa-history"></i> Recent Outcomes</h3>
+              <button class="clear-history" id="clearHistoryBtn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+            <div class="history-list" id="historyList">
+              <!-- History items will be added here dynamically -->
+              <div class="history-empty">
+                <i class="fas fa-dice-d20"></i>
+                <p>No spins yet. Start spinning!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievement Section -->
+          <div class="achievements-section">
+            <div class="achievement-header">
+              <h3><i class="fas fa-trophy"></i> Achievements</h3>
+            </div>
+            <div class="achievements-grid" id="achievements">
+              <div class="achievement-item locked" id="achieveFirstBlood">
+                <i class="fas fa-skull"></i>
+                <span>First Blood</span>
+              </div>
+              <div class="achievement-item locked" id="achieveLucky">
+                <i class="fas fa-clover"></i>
+                <span>Lucky Spin</span>
+              </div>
+              <div class="achievement-item locked" id="achieveWarrior">
+                <i class="fas fa-crown"></i>
+                <span>Warrior</span>
+              </div>
+              <div class="achievement-item locked" id="achieveGambler">
+                <i class="fas fa-dice"></i>
+                <span>Gambler</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Result Modal -->
+    <div class="modal" id="resultModal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-icon" id="modalIcon">
+          <i class="fas fa-dragon"></i>
+        </div>
+
+        <h2 class="modal-title" id="modalTitle">The Wheel Has Spoken!</h2>
+
+        <div class="modal-result" id="modalResult"></div>
+
+        <div class="modal-outcome" id="modalOutcome"></div>
+
+        <div class="modal-buttons">
+          <button class="btn btn-primary" id="spinAgain">
+            <i class="fas fa-redo-alt"></i> Spin Again
+          </button>
+          <button class="btn btn-secondary" id="closeModalBtn">
+            <i class="fas fa-check"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="spinSound" preload="auto">
+      <source
+        src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <audio id="winSound" preload="auto">
+      <source
+        src="https://www.soundjay.com/misc/sounds/bell-ringing-06.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <!-- JavaScript -->
+    <script src="js/wheel.js"></script>
+  </body>
+</html>
