@@ -255,7 +255,7 @@ $('sd').onclick=function(){try{
 }catch(e){win('Äänikortti','Äänikorttia ei löydy. Aku hoitaa.')}};
 
 // ===== MP3-SOITIN (Web Audio, ei vaadi palvelinta) =====
-var MP=[]; // oma soittolista, esim. ['Biisi|musiikki.mp3']: tiedostot samaan kansioon, sivu avattava palvelimelta
+var MP=['Biisi|Aku-Hoitaa.mp3']; // oma soittolista, esim. ['Biisi|musiikki.mp3']: tiedostot samaan kansioon, sivu avattava palvelimelta
 var mt=[{n:'Akun MIDI-hitti (sisäänrakennettu)'}].concat(MP.map(function(s){var p=s.split('|');return{n:p[0],u:p[1]}})),mi=0,mo=0,mc=null,mg=null,ms=null;
 function mUI(t){$('pt').textContent=t;$('pp').textContent=mo==1?'⏸':'▶'}
 function mInit(){if(!mc){mc=new(window.AudioContext||window.webkitAudioContext)();mg=mc.createGain();mg.gain.value=$('pv').value/100;mg.connect(mc.destination)}if(mc.state=='suspended')mc.resume()}
