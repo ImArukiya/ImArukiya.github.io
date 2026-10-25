@@ -126,7 +126,7 @@ input,textarea,select{font:14px "Comic Sans MS",cursive;max-width:100%}
 </div>
 
 </center>
-<div class=pl><b>🎵 AKUN RADIO</b> <marquee id=pt class=pt scrollamount=3></marquee> <button id=pp>▶</button><button id=ps>■</button><button id=pn>⏭</button> <input id=pv type=range min=0 max=100 value=40 title="Äänenvoimakkuus"> <label class=pf>📂 LISÄÄ MP3<input id=pf type=file accept="audio/*,.mp3" multiple hidden></label></div>
+<div class=pl><b>🎵 AKUN RADIO</b> <marquee id=pt class=pt scrollamount=3></marquee> <button id=pp>▶</button><button id=ps>■</button> <input id=pv type=range min=0 max=100 value=40 title="Äänenvoimakkuus"></div>
 <script>
 // ===== DATA (muokkaa vapaasti) =====
 var ST=['🟢 Paikalla ja korjaamassa.','🟡 Juuri asentamassa Windowsia uudelleen.','🔴 Kahvitauolla vuodesta 1998.','⚠️ Yrittää selvittää, miksi tulostin haisee palaneelta.','💀 Windows kaatui. Aku myös.'];
@@ -254,44 +254,28 @@ $('sd').onclick=function(){try{
   o.start(t);o.stop(t+4);
 }catch(e){win('Äänikortti','Äänikorttia ei löydy. Aku hoitaa.')}};
 
-// ===== MP3-SOITIN (Web Audio, ei vaadi palvelinta) =====
-var MP=['Biisi|Aku-Hoitaa.mp3']; // oma soittolista, esim. ['Biisi|musiikki.mp3']: tiedostot samaan kansioon, sivu avattava palvelimelta
-var mt=[{n:'Akun MIDI-hitti (sisäänrakennettu)'}].concat(MP.map(function(s){var p=s.split('|');return{n:p[0],u:p[1]}})),mi=0,mo=0,mc=null,mg=null,ms=null;
+// ===== MP3-SOITIN =====
+var mt=[{n:'Aku Hoitaa',u:'Biisi/Aku-Hoitaa.mp3'}],mi=0,mo=0,mc=null,mg=null,ms=null;
 function mUI(t){$('pt').textContent=t;$('pp').textContent=mo==1?'⏸':'▶'}
 function mInit(){if(!mc){mc=new(window.AudioContext||window.webkitAudioContext)();mg=mc.createGain();mg.gain.value=$('pv').value/100;mg.connect(mc.destination)}if(mc.state=='suspended')mc.resume()}
-function nx(){return mi+1<mt.length?mi+1:(mt.length>1?1:0)}
 function mStop(){if(ms){ms.onended=null;try{ms.stop()}catch(e){}ms=null}}
-// sisäänrakennettu MIDI-henkinen looppi piirretään suoraan äänipuskuriin
-function mTune(c){var sr=22050,sp=.18,len=Math.round(sr*sp*32),b=c.createBuffer(1,len,sr),d=b.getChannelData(0),
-  ch=[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],ar=[0,1,2,1,0,1,2,1],P=2*Math.PI,i,k,m,t,u,
-  fq=function(n){return 440*Math.pow(2,(n-69)/12)};
-  for(i=0;i<len;i++){k=Math.floor(i/(sr*sp));m=ch[k>>3];t=i/sr-k*sp;u=i/sr-(k>>1)*sp*2;
-    d[i]=(Math.sin(P*fq(m[ar[k%8]]+12)*t)>0?.1:-.1)*Math.min(1,t*500)*Math.exp(-t*8)
-        +Math.asin(Math.sin(P*fq(m[0]-(k%4<2?12:5))*u))*.16*Math.min(1,u*300)*Math.exp(-u*2)}
-  return b}
 function mLoad(k,cb){var t=mt[k],q;
   if(t.b)return cb(t.b);
-  if(!t.f&&!t.u){t.b=mTune(mc);return cb(t.b)}
-  q=t.f?t.f.arrayBuffer():fetch(t.u).then(function(r){return r.arrayBuffer()});
-  q.then(function(a){return mc.decodeAudioData(a)}).then(function(b){t.b=b;cb(b)}).catch(function(){mo=0;mUI('■ Virhe');win('Virhe','Raitaa ei voitu ladata: '+t.n+'\nValitse mp3 painikkeella tai avaa sivu palvelimelta.')})}
+  q=fetch(t.u).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer()});
+  q.then(function(a){return mc.decodeAudioData(a)}).then(function(b){t.b=b;cb(b)}).catch(function(){mo=0;mUI('■ Virhe');win('Virhe','Raitaa ei voitu ladata: '+t.n+'\nAvaa sivu palvelimelta.')})}
 function mGo(k){mInit();mStop();mi=k;mo=1;mUI('⏳ '+mt[k].n);
   mLoad(k,function(b){if(mi!=k||mo!=1||ms)return;
     var s=mc.createBufferSource();s.buffer=b;s.connect(mg);ms=s;
-    if(k==0||mt.length==1)s.loop=true;else s.onended=function(){mGo(nx())};
+    s.loop=true;
     s.start();mUI('🎵 '+mt[k].n)})}
 $('pp').onclick=function(){mInit();
   if(mo==1){mc.suspend();mo=2;mUI('⏸ '+mt[mi].n)}
   else if(mo==2&&ms){mo=1;mUI('🎵 '+mt[mi].n)}
   else mGo(mi)};
 $('ps').onclick=function(){mStop();mo=0;if(mc)mc.resume();mUI('■ Pysäytetty')};
-$('pn').onclick=function(){mGo(nx())};
-$('pf').parentNode.onclick=mInit;
-$('pf').onchange=function(e){var f=[].slice.call(e.target.files),n=mt.length;
-  f.forEach(function(x){mt.push({n:x.name.replace(/\.[^.]+$/,''),f:x})});e.target.value='';
-  if(f.length){if(mi==0||mo!=1)mGo(n);else mUI('🎵 '+mt[mi].n+' (+'+f.length+')')}};
 $('pv').value=S('aku_vol')||40;
 $('pv').oninput=function(){if(mg)mg.gain.value=this.value/100;S('aku_vol',this.value)};
-mUI('Paina ▶ tai lisää omia mp3-tiedostoja');
+mUI('Aku Hoitaa');
 
 // ===== SATUNNAISET ILMOITUKSET JA MODEEMIN YHDISTYS =====
 function rp(){var k=N(0,2);
