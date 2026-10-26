@@ -1,290 +1,254 @@
 <!DOCTYPE html>
-<html lang="fi">
-<head>
-<meta charset="utf-8">
+<html lang="fi"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AKUN IT- JA ELÄMÄNTUKIKESKUS</title>
+<title>Akun IT- ja elämäntukikeskus – Tervetuloa!</title>
+<link rel=stylesheet href='https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap'>
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-html{scroll-padding-top:env(safe-area-inset-top,0px);background:#00f}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light;--g:#c0c0c0}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px);background:var(--g)}
 *{box-sizing:border-box}
-body{margin:0;padding:6px 6px 96px;position:relative;overflow-x:hidden;background:#00f repeating-linear-gradient(45deg,rgba(0,0,0,.25) 0 6px,transparent 6px 12px);font:16px/1.3 "Times New Roman",Times,serif;color:#000}
+body{margin:0;padding:0 0 70px;background:var(--g);font:17px/1.35 "Times New Roman",Times,serif;color:#000;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--g);z-index:10}
 [hidden]{display:none!important}
-.b{background:#c0c0c0;border:4px outset #fff;margin:10px auto;padding:8px;max-width:760px;text-align:center;word-wrap:break-word}
-h1,h2{margin:4px 0}
-h1{font:bold 30px Impact,"Arial Black",sans-serif}
-h2{background:navy;color:#ff0;font:bold 22px "Comic Sans MS",cursive;padding:4px}
-a{color:#00f}a:visited,a.v{color:#808}
-hr{height:6px;border:0;background:repeating-linear-gradient(90deg,#f00 0 20px,#ff0 20px 40px,#0f0 40px 60px,#0ff 60px 80px,#00f 80px 100px,#f0f 100px 120px)}
-.r{color:#f00}
-.rb span{animation:rb 2s linear infinite}
-.bk{animation:bl 1s steps(1) infinite}
-.sp{display:inline-block;animation:sp 2s linear infinite}
-.bn{display:inline-block;animation:bn .6s ease-in-out infinite}
-@keyframes rb{0%,100%{color:#f00}17%{color:#f80}33%{color:#ee0}50%{color:#0c0}67%{color:#0cf}83%{color:#c0f}}
+.ch{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--g);border-bottom:2px solid #000;padding:4px 8px;font:12px Geneva,Tahoma,Arial,sans-serif}
+.ch div{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:2px 0}
+.ch input{flex:1 1 200px;min-width:0;font:14px "Courier New",monospace;border:2px inset #888;background:#fff;padding:1px 4px}
+.db,button{font:12px Geneva,Tahoma,Arial,sans-serif;color:#000;background:var(--g);border:2px outset #fff;box-shadow:1px 1px #000;padding:2px 8px;cursor:pointer;text-decoration:none;display:inline-block}
+.db:active,button:active{border-style:inset}
+main{max-width:900px;margin:0 auto;padding:10px 14px}
+svg.bn{display:block;width:100%;height:auto;max-width:100%}
+a{color:#00e}a:visited,a.v{color:#551a8b}
+h3{font:bold 1.2em "Times New Roman",Times,serif;font-variant:small-caps;letter-spacing:.5px;margin:18px 0 2px}
+dl{margin:0}dt{margin-top:6px}dd{margin:0 0 0 2.4em}
+hr{border:0;border-top:2px solid #808080;border-bottom:2px solid #fff;margin:16px 0}
+.mq{font:bold 14px "Courier New",monospace;background:#000;color:#0f0;padding:2px;margin:6px 0}
+.bk{animation:bl 1s steps(1) infinite;color:#c00;font-weight:bold}
 @keyframes bl{50%{visibility:hidden}}
-@keyframes sp{to{transform:rotate(1turn)}}
-@keyframes bn{50%{transform:translateY(-14px)}}
-@keyframes mv{to{background-position:34px 0}}
-@keyframes fl{50%{background:#f00;color:#ff0}}
-.mq{background:#000;color:#0f0;font:bold 18px "Courier New",monospace;border:3px ridge #f0f;padding:3px;margin:6px 0}
-.uc{background:repeating-linear-gradient(45deg,#ff0 0 12px,#000 12px 24px);padding:6px;animation:mv 1s linear infinite;margin:6px 0}
-.uc span{background:#000;color:#ff0;font:bold 18px Impact,sans-serif;padding:2px 8px}
-.stat,.lcd{background:#000;color:#0f0;font:bold 16px "Courier New",monospace;padding:6px;border:3px inset #888;cursor:pointer}
-.lcd{color:#f00;padding:2px 6px;letter-spacing:2px;font-size:20px}
-pre{display:inline-block;text-align:left;font-size:14px;margin:6px;max-width:100%;overflow-x:auto}
-button{font:bold 14px "Comic Sans MS",cursive;background:#c0c0c0;border:3px outset #fff;padding:4px 10px;cursor:pointer;margin:2px}
-button:active{border-style:inset}
-.call{font-size:22px;color:#f00;background:#ff0;border:6px outset #f80;animation:fl .6s steps(1) infinite}
-table.t{width:100%;border-spacing:2px;text-align:left}
-.t td{background:#fff;border:2px inset #888;padding:3px;font-size:15px}
-.ad{background:#ff0;border-color:#f0f;border-style:ridge;border-width:8px}
-.ad ul{text-align:left;padding-left:20px}
-.ic{width:32px;height:32px;image-rendering:pixelated;border:2px outset #fff;background:#fff}
-.gm{background:#fff;border:2px inset #888;margin:4px 0;padding:4px;text-align:left}
-.dc{position:absolute;z-index:5;pointer-events:none}
-.bdg{display:inline-block;border:3px outset #fff;background:#088;color:#fff;font:bold 11px Arial,sans-serif;padding:4px 8px;margin:3px}
-input,textarea,select{font:14px "Comic Sans MS",cursive;max-width:100%}
-.ov{position:fixed;inset:0;z-index:99;background:rgba(0,0,128,.45);display:flex;align-items:center;justify-content:center;padding:10px}
-.ov.ts{inset:auto 6px calc(96px + env(safe-area-inset-bottom,0px)) auto;width:300px;max-width:calc(100% - 12px);background:none;padding:0;display:block}
-.w98{background:#c0c0c0;border:3px outset #fff;width:min(420px,100%);font:14px Tahoma,Arial,sans-serif;text-align:center}
-.tb{background:navy;color:#fff;padding:3px 5px;display:flex;justify-content:space-between;font-weight:bold}
-.tb b{background:#c0c0c0;color:#000;border:2px outset #fff;padding:0 6px;cursor:pointer}
-.bd{padding:12px}.bd p{white-space:pre-line;margin:0 0 10px;text-align:left}
-.pb{display:none;height:18px;border:2px inset #fff;background:#fff;margin-bottom:10px}
-.pb i{display:block;height:100%;width:0;transition:width .5s;background:repeating-linear-gradient(90deg,navy 0 8px,#fff 8px 10px)}
-.pl{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#c0c0c0;border-top:3px outset #fff;padding:4px 6px calc(4px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;align-items:center;gap:4px;font:bold 13px Tahoma,Arial,sans-serif}
-.pt{flex:1 1 130px;min-width:0;background:#000;color:#0f0;font:bold 13px "Courier New",monospace;border:2px inset #888;padding:2px 4px}
-.pf{font:bold 14px "Comic Sans MS",cursive;background:#c0c0c0;border:3px outset #fff;padding:3px 8px;cursor:pointer}
-.pl input[type=range]{width:90px}
-@media(prefers-reduced-motion:reduce){.bk,.rb span,.sp,.bn,.uc,.call,.dc{animation:none!important}}
-</style>
-</head>
-<body>
-<center>
-
-<div class=b>
-<h1 class=rb>TERVETULOA AKUN VIRALLISELLE KOTISIVULLE!!!</h1>
-<marquee class=mq scrollamount=9>TERVETULOA!!! PARAS KATSELUKOKEMUS 800x600-RESOLUUTIOLLA!!! SUOSITTELEMME INTERNET EXPLORER 4.0 -SELAINTA!!! ÄLÄ SAMMUTA MODEEMIA!!!</marquee>
-<div class=uc><span>🚧 SIVUSTOA RAKENNETAAN 🚧 👷</span></div>
-<p><span class=sp>⭐</span> <span class=bn>🔥</span> <big class="bk r"><b>★ UUSI! ★</b></big> <span class=bn>🔥</span> <span class=sp>⭐</span></p>
-<p><b>JOS SE ON RIKKI, AKU HOITAA. JOS SE EI OLE RIKKI, AKU KATSOO SITÄ KUNNES SE ON.</b></p>
-<pre>
-  ______________________
- |  __________________  |
- | |  C:\&gt;AKU_        | |
- | |  HOITAA.EXE      | |
- | |__________________| |
- |______________________|
-     __|__________|__
-    /________________\
-   /_ _ _ _ _ _ _ _ _ _\
-</pre>
-<p class=r><b>TIETOKONEESI ON TODENNÄKÖISESTI KUNNOSSA. SINÄ OLET ONGELMA.</b></p>
-<div id=st class=stat title="Klikkaa päivittääksesi"></div>
-<p>Kävijä numero: <span id=cnt class=lcd>00001337</span><br>Sivuston sisäinen kello: <span id=clk></span></p>
-<p><button id=ub>TEE SIVUSTOSTA VIELÄ HUONOMPI</button> <button id=sd>🔊 TOISTA MODEEMIN ÄÄNI (oletuksena pois)</button> <button id=ur>palauta</button></p>
-</div>
-
-<table class=b width=100%><tr align=center>
-<td><a class=n href="#s1">IT-TUKI</a><td><a class=n href="#s2">ELÄMÄNTUKI</a><td><a class=n href="#s3">AKU HOITAA</a><td><a class=n href="#s4">LATAUKSET</a><td><a class=n href="#s5">VIERASKIRJA</a><td><a class=n href="#s6">TARKASTUS</a><td><a class=n href="#s7">LINKIT</a>
-</table>
-
-<div class=b id=s1><h2>💻 AKUN IT-TUKI 💻</h2><p>Ongelma kuin ongelma. Ratkaisu on aina sama:</p><table class=t id=it></table></div>
-
-<div class=b id=s2><h2>❤ ELÄMÄNTUKIKESKUS ❤</h2><p><b>ELÄMÄNTEKNINEN TUKI – PALVELEMME MYÖS ILMAN TAKUUTA!</b></p><table class=t id=lf></table><p><button id=lb>KORJAA ELÄMÄNI</button></p></div>
-
+.lcd{background:#000;color:#f00;font:bold 18px "Courier New",monospace;letter-spacing:2px;padding:1px 6px;border:2px inset #888;cursor:pointer}
+.uc{background:repeating-linear-gradient(45deg,#ff0 0 12px,#000 12px 24px);padding:5px;text-align:center;margin:8px 0}
+.uc b{background:#000;color:#ff0;padding:2px 8px;font:bold 15px Arial,sans-serif}
+.gm{background:#fff;border:2px inset #888;margin:4px 0;padding:4px}
+input,textarea,select{font:14px Geneva,Tahoma,Arial,sans-serif;max-width:100%}
+address{font-style:italic}
+dialog{border:2px solid #000;box-shadow:4px 4px #000;background:#fff;padding:0;width:min(420px,92vw);font:14px Geneva,Tahoma,Arial,sans-serif}
+dialog::backdrop{background:rgba(0,0,0,.25)}
+.dt{background:repeating-linear-gradient(#000 0 1px,#fff 1px 3px);text-align:center;border-bottom:2px solid #000;height:18px;line-height:16px}
+.dt b{background:#fff;padding:0 8px}
+.dm{padding:12px;white-space:pre-line}
+.pg{display:none;height:16px;border:2px solid #000;margin:0 12px 12px}.pg i{display:block;height:100%;width:0;background:#000;transition:width .5s}
+dialog form{padding:0 12px 12px;text-align:right}
+#ts{position:fixed;right:6px;bottom:calc(54px + env(safe-area-inset-bottom,0px));width:min(280px,92vw);z-index:50;background:#fff;border:2px solid #000;box-shadow:3px 3px #000;padding:8px;font:13px Geneva,Tahoma,Arial,sans-serif}
+.pl{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--g);border-top:2px solid #000;padding:4px 8px calc(4px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:12px Geneva,Tahoma,Arial,sans-serif}
+#pt{flex:1 1 120px;min-width:0;background:#fff;border:2px inset #888;padding:1px 4px;font-family:"Courier New",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.u{background:#00f repeating-linear-gradient(45deg,rgba(0,0,0,.25) 0 6px,transparent 6px 12px)}
+.u main{background:var(--g);border:4px outset #fff}.u h3{color:#c00}
+section>h3{background:#003a70;color:#fff;padding:3px 8px;border:2px outset #6a9ad0}.bb{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#003a70;color:#fff;border:2px outset #6a9ad0;padding:6px 10px;font-family:Arial,Helvetica,sans-serif}.bb svg{width:54px;height:54px;flex:none}.bb b{font-size:21px;letter-spacing:1px}.bb small{display:block;color:#fc0;font-size:12px}.bb span{margin-left:auto;font-size:11px;text-align:right}.nav{display:flex;flex-wrap:wrap;background:#0a2a50;border:2px outset #6a9ad0;border-top:0;margin-bottom:8px}.nav a{color:#fff;font:bold 13px Arial,Helvetica,sans-serif;padding:6px 10px;text-decoration:none;border-right:1px solid #1c5a9a}.nav a:hover{background:#c00}.ow{overflow-x:auto}.tb{width:100%;border-collapse:collapse;background:#fff;font:14px Arial,Helvetica,sans-serif;margin:6px 0}.tb th{background:#003a70;color:#fff;text-align:left;padding:4px 6px}.tb td{border:1px solid #888;padding:4px 6px;vertical-align:top}.tb tr.hl td{background:#ffec99}.bdg{display:inline-block;border:2px outset #fff;background:#003a70;color:#fff;font:bold 11px Arial,sans-serif;padding:4px 8px;margin:3px;text-align:center}.bdg.y{background:#fc0;color:#003}#skc{display:block;background:#000;border:2px inset #888;max-width:100%}
+dialog,#ts{color:#000}.m26{display:none}
+.t26{--g:#eef0f7;--n:#0a1d7a;--f:'Open Sans','Segoe UI',Arial,sans-serif;--h:'Barlow Condensed','Arial Narrow',Impact,sans-serif;background:#fff;font:15px/1.5 var(--f);color:#10163a}
+.t26 .m26{display:block}
+.t26 .bb,.t26 .nav,.t26 svg.bn,.t26 .mq,.t26 .uc,.t26 main>h3,.t26 main>dl,.t26 main>a.fk,.t26 main>hr{display:none}
+.t26 main{max-width:1180px;padding:0 16px}
+.t26 .ch{border-bottom:1px solid #d6d9e8;font-family:var(--f)}.t26 .ch input{border:1px solid #bbb;border-radius:99px;font:13px var(--f);padding:3px 12px}
+.t26 .db,.t26 button{border:0;border-radius:99px;background:#fff;color:var(--n);box-shadow:inset 0 0 0 1px #c5c9e0;font:700 13px var(--f);padding:6px 16px}
+.t26 a,.t26 a:visited,.t26 a.v{color:var(--n)}
+.t26 section{background:var(--n);color:#fff;padding:24px 20px;margin:20px 0}.t26 section a,.t26 section a:visited{color:#ffd400}
+.t26 #s3,.t26 #s8,.t26 #s9,.t26 #se,.t26 #sy{background:#fff;color:#10163a;padding:8px 0}.t26 #s3 a,.t26 #s8 a,.t26 #s9 a,.t26 #se a,.t26 #sy a,.t26 .tb a,.t26 .tb a:visited{color:var(--n)}
+.t26 section>h3,.t26 .nv h2,.t26 .kt{background:none;border:0;padding:0 0 12px;margin:0;color:inherit;font:700 32px/1.1 var(--h);text-transform:uppercase;font-variant:normal;letter-spacing:0}
+.t26 .tb{font-family:var(--f);border-radius:8px;overflow:hidden}.t26 .tb th{background:#e8ebf8;color:var(--n)}.t26 .tb td{color:#10163a}
+.t26 .gm{background:#fff;color:#10163a;border:0;border-radius:8px}.t26 .pl{border-top:1px solid #d6d9e8}.t26 address{font-style:normal;color:#555}
+.t26 dialog{border:0;border-radius:12px;box-shadow:0 12px 40px #001450aa;font-family:var(--f);color:#10163a}.t26 .dt{background:var(--n);color:#fff;height:auto;line-height:1;padding:12px 16px;text-align:left;border:0}.t26 .dt b{background:none;padding:0}
+.t26 .pg{border:0;border-radius:99px;background:#e5e8f5;overflow:hidden}.t26 .pg i{background:#3a8a1c}.t26 dialog button,.t26 .pill.g{background:#3a8a1c;color:#fff;box-shadow:none}
+.t26 #ts{border:0;border-radius:12px;box-shadow:0 8px 30px #001450aa;font-family:var(--f)}
+.tp{display:flex;justify-content:space-between;font:12px var(--f);padding:6px 0}.tp b{background:#3a8a1c;color:#fff;border-radius:99px;padding:1px 10px;margin:0 8px}
+.hd{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 0}.hd svg{height:38px}.lg{font:800 32px var(--h);color:var(--n);letter-spacing:1px}.hd input{flex:1 1 220px;border:0;background:#eef0f6;border-radius:99px;padding:10px 16px;font:14px var(--f)}.hd a{font:600 11px var(--f);text-align:center;text-decoration:none}
+.ct{display:flex;gap:6px;overflow-x:auto;padding:10px 0}.ct a{flex:0 0 96px;text-align:center;font:600 10px var(--f);text-transform:uppercase;text-decoration:none}.ct i{display:block;font-size:30px;font-style:normal}
+.hr6{display:flex;flex-wrap:wrap;min-height:270px;color:#fff;overflow:hidden}.hr6>div{flex:1 1 280px;padding:24px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px}.hr6 big{font-size:30px}.hr6>em{flex:1 1 220px;display:flex;align-items:center;justify-content:center;font-size:120px;font-style:normal}.dots{text-align:center;margin:6px 0}
+.pt4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}.pt4 a{min-height:110px;padding:14px;font:600 26px/1 var(--h);text-transform:uppercase;text-decoration:none}
+.bnr{background:linear-gradient(90deg,#1a1060,#5a1a8a);color:#fff;padding:28px;margin:20px 0}.bnr h2{font:700 36px var(--h);text-transform:uppercase;margin:0 0 8px}
+.nv{background:var(--n);color:#fff;padding:24px 20px;margin:20px 0}
+.cd{display:flex;gap:12px;overflow-x:auto;padding:4px 0 8px}.cd>div{flex:0 0 200px;background:#fff;color:#10163a;padding:10px;font:12px var(--f);display:flex;flex-direction:column;gap:4px}.cd em{text-align:center;font-size:70px;font-style:normal}.cd i{align-self:flex-start;background:#ffd400;font:700 11px var(--f);padding:2px 6px;font-style:normal}.cd strong{font:700 28px var(--h)}.gn{color:#3a8a1c}
+.ib{display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;font:700 11px var(--f);text-transform:uppercase;text-align:center}.ib i{display:block;font-size:30px;font-style:normal}
+.ar{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.ar>div{display:flex;flex-direction:column;gap:8px;font:13px var(--f)}.ar em{height:110px;display:flex;align-items:center;justify-content:center;font-size:56px;font-style:normal;background:#13289a}.ar b{font-size:16px}.pill{align-self:flex-start;border:0;border-radius:99px;padding:8px 22px;font-weight:700;cursor:pointer;background:#fff;color:var(--n)}.pill.y{background:#f5a000;color:#fff}
+.ft{background:var(--n);color:#fff;padding:24px;margin-top:20px;font:13px var(--f);text-align:center}.fc{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;text-align:left}.fc h4{margin:0 0 8px}.t26 .ft a,.t26 .ft a:visited{color:#fff;display:block;line-height:2}.t26 .ft small a{display:inline}.ft .lg{color:#fff;font-size:40px;margin:8px 0}
+.cht{position:fixed;right:0;top:45%;z-index:20;background:var(--n);border-radius:99px 0 0 99px;padding:8px 14px;font:600 12px var(--f);text-decoration:none}.t26 a.cht{color:#fff}
+@media(prefers-reduced-motion:reduce){.bk{animation:none}.pg i{transition:none}}
+</style></head><body>
+<div class=ch><div><b>Netsite:</b><input id=url readonly value="http://www.aku.hoitaa.fi/" aria-label="Osoite"></div>
+<div><a class=db href="#s3">Uutta?</a><a class=db href="#s4">Siistiä?</a><a class=db href="#s8">Käsikirja</a><a class=db href="#s9">Verkkohaku</a><a class=db href="#s1">Hakemisto</a><a class=db href="#s6">Uutisryhmät</a></div></div>
+<main><div class=m26 id=ha></div><div class=bb><svg viewBox='0 0 54 54' aria-hidden=true><path d='M27 2l22 13v24L27 52 5 39V15z' fill=#fc0 stroke=#fff stroke-width=2 /><text x=27 y=37 font-size=28 font-weight=bold font-family=Arial,sans-serif text-anchor=middle fill=#003a70>A</text></svg><div><b>AKU Enterprise Solutions Oy™</b><small>Enterprise-luokan IT- ja elämäntuki. Jos se on rikki, Aku hoitaa.</small></div><span>Asiakaspalvelu: 0100 9999<br>(0,99 €/min + Akun mielipide)<br>Y-tunnus: 1337-AKU (väitetään)</span></div><nav class=nav><a href=#sr>Ratkaisut</a><a href=#sh>Hinnoittelu</a><a href=#sa>Asiakkaat</a><a href=#sz>Tilasivu</a><a href=#sy>Yhtiö</a><a href=#su>Ura</a><a href=#si>Sijoittajat</a><a href=#s1>Tuki</a><a href=#sm>Yhteys</a></nav>
+<svg class=bn viewBox="0 0 1008 360" role=img aria-label="Tervetuloa Akun kotisivuille" font-family="Arial,Helvetica,sans-serif" font-weight=bold>
+<rect width=1008 height=360 fill=#000 />
+<rect x=6 y=6 width=62 height=62 fill=#0a4a60 stroke=#2aa8c0 stroke-width=3 /><text x=37 y=52 font-size=44 fill=#fff font-family=Georgia,serif text-anchor=middle>A</text>
+<text x=545 y=50 fill=#fff font-size=30 letter-spacing=10 text-anchor=middle>TERVETULOA AKUN SIVUILLE</text>
+<a href="#s1"><rect y=70 width=168 height=180 fill=#000 /><path d="M0 98h62" stroke=#6ef stroke-width=7 /><path d="M62 92l70-9 32 24-72 10z" fill=#aab /><path d="M0 250Q80 188 168 232V250z" fill=#d8c08a /><path d="M110 200v-26l22 8-22 8" fill=#2a5aa8 stroke=#ccc /><circle cx=140 cy=140 r=2 fill=#fff />
+<text x=84 y=282 fill=#fff font-size=17 text-anchor=middle>IT-TUKI</text><text x=84 y=302 fill=#fff font-size=17 text-anchor=middle>&amp; ATK</text></a>
+<a href="#s2"><rect x=168 y=70 width=168 height=180 fill=#7a3d96 /><rect x=168 y=205 width=168 height=45 fill=#2a8aa0 /><path d="M200 195L300 92" stroke=#222 stroke-width=4 /><path d="M296 96v55" stroke=#222 /><rect x=278 y=150 width=36 height=30 fill=#8a6a3a /><rect x=190 y=214 width=44 height=20 fill=#d8a820 /><circle cx=200 cy=94 r=4 fill=#ff0 />
+<text x=252 y=282 fill=#fff font-size=17 text-anchor=middle>ELÄMÄN</text><text x=252 y=302 fill=#fff font-size=17 text-anchor=middle>TUKI</text></a>
+<a href="#s3"><rect x=336 y=70 width=168 height=180 fill=#2ac0e8 /><circle cx=478 cy=112 r=24 fill=#ffe84a /><rect x=350 y=140 width=130 height=72 fill=#eee /><rect x=366 y=152 width=26 height=20 fill=#5ab0e8 /><rect x=420 y=152 width=26 height=20 fill=#5ab0e8 /><circle cx=352 cy=170 r=24 fill=#2a9a3a /><rect x=336 y=212 width=168 height=38 fill=#4aa860 /><rect x=424 y=176 width=14 height=44 fill=#123 /><circle cx=431 cy=170 r=8 fill=#c96 />
+<text x=420 y=282 fill=#fff font-size=17 text-anchor=middle>UUTTA</text><text x=420 y=302 fill=#fff font-size=17 text-anchor=middle>&amp; AKU</text></a>
+<a href="#s5"><rect x=504 y=70 width=168 height=180 fill=#001a6e /><circle cx=590 cy=146 r=68 fill=#f0f0f0 /><path d="M556 104l16 26-10 5 16 32M610 100l-8 28 12 4-10 26" stroke=#f0a020 stroke-width=6 fill=none /><path d="M590 170l-22 80h44z" fill=#222 /><rect x=504 y=226 width=168 height=24 fill=#2a9a3a />
+<text x=588 y=282 fill=#fff font-size=17 text-anchor=middle>LATAUKSET</text><text x=588 y=302 fill=#fff font-size=17 text-anchor=middle>&amp; OHJELMAT</text></a>
+<a href="#s6"><rect x=672 y=70 width=168 height=180 fill=#e86a10 /><rect x=672 y=190 width=168 height=60 fill=#1a5aa8 /><path d="M672 250V218Q744 196 840 238V250z" fill=#c8a060 /><rect x=746 y=130 width=16 height=56 fill=#fff /><rect x=743 y=120 width=22 height=12 fill=#222 /><path d="M765 126L840 108V142z" fill=#fff /><circle cx=700 cy=110 r=2 fill=#fff />
+<text x=756 y=282 fill=#fff font-size=17 text-anchor=middle>VIERAS</text><text x=756 y=302 fill=#fff font-size=17 text-anchor=middle>KIRJA</text></a>
+<a href="#s9"><rect x=840 y=70 width=168 height=180 fill=#1a8aa0 /><rect x=840 y=125 width=168 height=14 fill=#e8a0c0 /><path d="M866 250a52 46 0 0 1 104 0z" fill=#e8f4ff /><rect x=906 y=230 width=24 height=20 fill=#123 /><path d="M840 250V225H866" fill=#000 />
+<text x=924 y=282 fill=#fff font-size=17 text-anchor=middle>LINKIT</text><text x=924 y=302 fill=#fff font-size=17 text-anchor=middle>EI-MIHINKÄÄN</text></a>
+<path d="M168 250v62M336 250v62M504 250v62M672 250v62M840 250v62" stroke=#444 /><rect y=312 width=1008 height=48 fill=#080808 /><path d="M0 311h1008" stroke=#ddd stroke-width=6 />
+<text x=504 y=345 fill=#ffe fill-opacity=.95 font-size=22 letter-spacing=9 text-anchor=middle>AKUN PALVELINGALLERIA</text><text x=200 y=346 fill=#ff8 font-size=26>✦</text><text x=780 y=346 fill=#ff8 font-size=26>✦</text></svg>
+<marquee class=mq scrollamount=6>PARAS KATSELUKOKEMUS: NETSCAPE NAVIGATOR 1.1N, 640x480, 256 VÄRIÄ. ÄLÄ SAMMUTA MODEEMIA!</marquee>
+<div class=uc><b>🚧 SIVUSTOA RAKENNETAAN VUODESTA 1995 🚧</b></div>
+<h3>Aku-kuriiri</h3><dl><dd>Aku ilmoittaa <a href=# class=fk data-m="Protokolla on vielä salainen. Aku ei muista salasanaa.">ensimmäisen avoimen, alustariippumattoman ”korjausprotokollan”</a>, jota tukevat Pori, Kokkola ja muut.</dd></dl>
+<h3>Windows 95 Aku-navigaattori beta</h3><dl><dd><a href=# class=fk data-m="Latauslinkki katosi. Beta pysyy betana.">Lataa</a> uusin beta-julkaisu Akun korjausohjelmasta, erityisesti viritetty hyödyntämään <a href=# class=fk data-m="Parannukset: yksi uusi virhe.">Win 95 -käyttöliittymän parannuksia ja ominaisuuksia</a>.</dd></dl>
+<h3>Palvelinmania</h3><dl><dd>Testaa <a href=# class=fk data-m="Palvelin on lainassa. Se palautuu vuonna 1999.">täysin ladattua Aku-palvelinta</a> 60 päivän ajan ja voita kilpa liikeyritysten ongelmanratkaisussa. Nyt <b>ilmainen</b> koulutus- ja <a href=# class=fk>hyväntekeväisyysjärjestöille</a>.</dd></dl>
 <hr>
-
-<div class="b ad" id=s3>
-<h1 class=rb style="background:#000">ONKO ONGELMIA? EI HÄTÄÄ! AKU HOITAA KAIKEN!!!</h1>
-<p class="r bk"><b>⚠ VAROITUS: AKU EI TAKAA MITÄÄN ⚠ TARJOUS VOIMASSA VAIN TÄNÄÄN (JOKA PÄIVÄ) ⚠</b></p>
-<ul id=ad></ul>
-<p>★★★★★ ”Aku hoiti. En tiedä mitä, mutta hoiti.” – Tiina, Kokkola<br>★★★★★ ”Soitin Akulle kerran. Tulostin toimii yhä, minä en.” – Make, Vaasa<br>★★★★☆ ”Neljä tähteä, koska viides meni rikki.” – Mummo, Pori</p>
-<button class=call id=cb>[ SOITA AKULLE NYT!!! ]</button>
-<div class=b id=fm hidden><h2>📞 TUKIPYYNTÖLOMAKE</h2>Nimesi: <input id=fn maxlength=30><br><br>Ongelmasi: <select id=fp></select><br><br><button id=fs>LÄHETÄ AKULLE!!!</button></div>
-</div>
-
-<div class=b id=s4><h2>💾 AKUN ILMAISET OHJELMAT 💾</h2><p><b>100 % ILMAISIA, 0 % HYÖDYLLISIÄ!</b></p><table class=t id=pg></table></div>
-
-<div class=b id=s5><h2>📖 VIERASKIRJA 📖</h2><p>Nimi: <input id=gn maxlength=30><br>Viesti:<br><textarea id=gt rows=3 cols=34 maxlength=300></textarea><br><button id=gs>KIRJOITA VIERASKIRJAAN</button><br><small>Viestit tallentuvat vain tämän selaimen localStorageen.</small></p><div id=gl></div></div>
-
-<div class=b id=s6><h2>🖥️ JÄRJESTELMÄN TERVEYSTARKASTUS 🖥️</h2><table class=t id=hc></table><p><button id=hb>TARKASTA ELÄMÄNI NYT</button></p></div>
-
-<div class=b id=s7><h2>🔗 LINKKEJÄ EI-MIHINKÄÄN 🔗</h2><ul id=lk style="text-align:left"></ul>
-<div class=b><b>🌐 SUOMALAISTEN IT-GURUJEN WEBRING 🌐</b><br><a class=fk href="#" data-m="Edellinen sivusto poistui verkosta vuonna 1999.">◄ EDELLINEN</a> | <a class=fk href="#" data-m="Satunnainen sivusto ei löytynyt. Satunnaisuus on rikki.">SATUNNAINEN</a> | <a class=fk href="#" data-m="Seuraava sivusto on rakenteilla vuodesta 1998.">SEURAAVA ►</a></div></div>
-
-<div class=b id=sc hidden><h2>🔒 SALAINEN SIVU!!! 🔒</h2><p>Onneksi olkoon, löysit salaisen sivun! Akun salainen totuus: Aku ei oikeasti korjaa mitään. Hän vain katsoo sitä.</p><p class="r bk"><b>SALAINEN KOODI: AKU-HOITAA-1337</b></p><button id=sx>SULJE (ÄLÄ KERRO KENELLEKÄÄN)</button></div>
-
-<div class=b>
-<h1 class=rb>TARVITSETKO APUA? AKU HOITAA!!!</h1>
-<p>Ei ongelmaa liian suurta.<br>Ei tehtävää liian mahdotonta.<br>Ei Windows-virhettä liian vakavaa.</p>
-<p class=r><b>AKU HOITAA KAIKEN. PAITSI OMAT ONGELMANSA.</b></p>
+<a href=# class=fk data-m="Esittelyssä: Aku. Lisää tietoa ei ole."><svg class=bn viewBox="0 0 800 120" role=img aria-label="Esittelyssä Aku Navigator" font-family="Arial,Helvetica,sans-serif" font-weight=bold><rect x=2 y=2 width=796 height=116 fill=#0e7a8c stroke=#1a1aa8 stroke-width=4 /><ellipse cx=118 cy=58 rx=96 ry=42 fill=#fff /><text x=118 y=66 font-size=22 font-style=italic text-anchor=middle fill=#123>ESITTELYSSÄ...</text><path d="M232 96q34-66 100-44 28 8 54-8-8 34-44 48-64 22-110 4z" fill=#4aa83a /><path d="M360 76l30 6-30 8z" fill=#a02a8a /><circle cx=330 cy=62 r=8 fill=#fff /><circle cx=332 cy=62 r=3 fill=#000 /><text x=410 y=64 font-size=58 fill=#fff>Aku</text><text x=410 y=108 font-size=40 fill=#fff letter-spacing=2>NAVIGATOR</text><text x=702 y=94 font-size=15 fill=#aef>HENKILÖKOHTAINEN</text><text x=702 y=110 font-size=15 fill=#aef>PAINOS</text></svg></a>
 <hr>
-<span class=bdg>PARAS KATSELUKOKEMUS<br>NETSCAPE NAVIGATORILLA</span><span class=bdg style="background:#00a">INTERNET EXPLORER 4.0<br>800x600</span>
-<p><small>Valmistettu Microsoft FrontPage 98:lla<br>© 1997 Aku. Viimeksi päivitetty 12.4.1998. Löydetty uudelleen 2026.</small></p>
-</div>
-
-</center>
-<div class=pl><b>🎵 AKUN RADIO</b> <marquee id=pt class=pt scrollamount=3></marquee> <button id=pp>▶</button><button id=ps>■</button> <input id=pv type=range min=0 max=100 value=40 title="Äänenvoimakkuus"></div>
+<section id=sr><h3>Ratkaisut yritysasiakkaille</h3><p style='margin:2px 0 0 2.4em'><b>Luottavat meihin:</b> Pori, Kokkola, Vaasa, Mummo ja yksi kissa.</p><div class=ow><table class=tb><thead><tr><th>Tuote<th>Mitä se tekee<th>Tila<tbody id=sl></table></div></section>
+<section id=sh><h3>Hinnoittelu ja palvelutasosopimus (SLA)</h3><div class=ow><table class=tb><thead><tr><th>Paketti<th>Hinta<th>Sisältö<th>SLA<tbody id=pr></table></div><p style='margin-left:2.4em'><b>ROI-laskuri:</b> henkilöstön määrä <input id=rn type=number min=1 value=25 style='width:5em'> <button id=rb>Laske säästöt</button></p></section>
+<section id=sa><h3>Asiakkaat ja menestystarinat</h3><dl id=cs></dl><p><span class=bdg>ISO 9001-ish</span><span class=bdg>SOC 2<br>(Sometimes Occasionally Coffee)</span><span class=bdg>GDPR-ystävällinen<br>(Aku ei lue)</span><span class='bdg y'>Microsoft Certified Aku</span><span class=bdg>100 % pilvivapaa</span></p></section>
+<section id=sz><h3>Palvelun tilasivu</h3><p style='margin:2px 0 0 2.4em'><b>Kaikki järjestelmät: ei tietoa.</b></p><div class=ow><table class=tb><tbody id=stt></table></div></section>
+<hr>
+<section id=s3><h3>Uutta Akun kotisivuilla</h3><dl id=nw></dl></section>
+<section id=s1><h3>Akun IT-tuki</h3><p style="margin:2px 0 0 2.4em">Ongelma kuin ongelma. Ratkaisu on aina sama:</p><dl id=it></dl>
+<p><a href=# id=cb>[ Soita Akulle nyt! ]</a></p>
+<form id=fm hidden class=gm><b>Tukipyyntölomake</b><br>Nimesi: <input id=fn maxlength=30><br>Ongelmasi: <select id=fp></select><br><button type=button id=fs>Lähetä Akulle</button></form></section>
+<hr>
+<section id=s2><h3>Elämäntukikeskus</h3><p style="margin:2px 0 0 2.4em"><b>Elämäntekninen tuki – palvelemme myös ilman takuuta!</b></p><dl id=lf></dl><p><button id=lb>Korjaa elämäni</button></p></section>
+<section id=s4><h3>Siistiä (What’s Cool)</h3><dl id=cl></dl></section>
+<section id=s5><h3>Akun ilmaiset ohjelmat</h3><p style="margin:2px 0 0 2.4em"><b>100 % ilmaisia, 0 % hyödyllisiä!</b></p><dl id=pg></dl></section>
+<hr>
+<section id=s6><h3>Vieraskirja</h3><dl><dd>Nimi: <input id=gn maxlength=30><br>Viesti:<br><textarea id=gt rows=3 cols=34 maxlength=300></textarea><br><button id=gs>Kirjoita vieraskirjaan</button><br><small>Viestit tallentuvat vain tämän selaimen localStorageen.</small></dd></dl><div id=gl></div></section>
+<section id=s7><h3>Järjestelmän terveystarkastus</h3><dl id=hc></dl><p><button id=hb>Tarkasta elämäni nyt</button> Tämän viikon ongelma: <b id=wp></b> <a href=# id=wn>[uusi]</a></p></section>
+<section id=s8><h3>Käsikirja: usein kysytyt kysymykset</h3><dl id=fq></dl></section>
+<hr>
+<section id=s9><h3>Linkkejä ei-mihinkään</h3><ul id=lk></ul>
+<p><b>Suomalaisten IT-gurujen webring:</b> <a href=# class=fk data-m="Edellinen sivusto poistui verkosta vuonna 1999.">◄ Edellinen</a> | <a href=# class=fk data-m="Satunnainen sivusto ei löytynyt. Satunnaisuus on rikki.">Satunnainen</a> | <a href=# class=fk data-m="Seuraava sivusto on rakenteilla vuodesta 1998.">Seuraava ►</a></p></section>
+<section id=sy><h3>Yhtiö ja tiedotteet</h3><dl id=pn></dl></section>
+<section id=su><h3>Ura Akulla</h3><p style='margin:2px 0 0 2.4em'><b>Liity tiimiimme! Meillä on tiimi. Tiimi on Aku.</b></p><div class=ow><table class=tb><thead><tr><th>Tehtävä<th>Vaatimukset<th>Palkka<th><tbody id=jb></table></div></section>
+<section id=si><h3>Sijoittajat</h3><p style='margin:2px 0 0 2.4em'><b id=spx></b> <small>(Porin perunapörssi, viiveellä 15 minuuttia tai ikuisuus)</small></p><canvas id=skc width=320 height=70></canvas><dl id=kf></dl></section>
+<section id=sm><h3>Yhteystiedot ja uutiskirje</h3><dl><dt><b>Pääkonttori</b><dd>Akun olohuone, Pori. Parkkipaikka: sohvan takana.<dt><b>Sähköposti</b><dd><a href=mailto:aku@hoitaa.fi>aku@hoitaa.fi</a> (vastausaika: ks. SLA)<dt><b>Uutiskirje</b><dd>Sähköposti: <input id=ne type=email> <button id=nb>Tilaa</button></dl><div class=gm>🍪 <b>Evästeet.</b> Käytämme evästeitä, koska Aku söi ne. <button class=ckb>Hyväksy kaikki</button> <button class=ckb>Hyväksy kaikki</button></div></section>
+<section id=se><h3>Käyttöehdot</h3><dl id=et></dl></section>
+<section id=sc hidden class=gm><h3>Salainen sivu!!!</h3><p>Onneksi olkoon, löysit salaisen sivun! Akun salainen totuus: Aku ei oikeasti korjaa mitään. Hän vain katsoo sitä.</p><p class=bk>SALAINEN KOODI: AKU-HOITAA-1337</p><button id=sx>Sulje (älä kerro kenellekään)</button></section>
+<hr>
+<p>Kävijä numero: <span id=cnt class=lcd title="Klikkaa. Monta kertaa.">00001337</span> · Kello: <span id=clk></span></p>
+<p><button id=sd>🔊 Toista modeemin ääni</button> <button id=ug>Lisää 90-lukua</button> <span class=bk>★ UUSI! ★</span></p>
+<address>Aku &lt;<a href="mailto:aku@hoitaa.fi">aku@hoitaa.fi</a>&gt; · Valmistettu Netscape Navigator Gold -editorilla<br>© 1995 Aku. Viimeksi päivitetty 12.4.1995. Löydetty uudelleen 2026.</address>
+<div class=m26 id=hz></div></main>
+<div id=ts hidden></div>
+<dialog id=dg><div class=dt><b id=dtt></b></div><div class=dm id=dm></div><div class=pg id=pb><i id=pf></i></div><form method=dialog><button id=ok>OK</button></form></dialog>
+<div class=pl><b>🎵 Akun radio</b> <span id=pt></span> <button id=pp>▶</button><button id=ps>■</button> <input id=pv type=range min=0 max=100 value=40 title="Äänenvoimakkuus"></div>
 <script>
-// ===== DATA (muokkaa vapaasti) =====
-var ST=['🟢 Paikalla ja korjaamassa.','🟡 Juuri asentamassa Windowsia uudelleen.','🔴 Kahvitauolla vuodesta 1998.','⚠️ Yrittää selvittää, miksi tulostin haisee palaneelta.','💀 Windows kaatui. Aku myös.'];
-var IT=['Tietokone on hidas?','Internet ei toimi?','Tulostin ei tulosta?','Poistit vahingossa System32-kansion?|Aku ei takaa tietojen säilymistä.','Unohdit salasanasi?|Aku ei tiedä salasanaasi.','Tietokone pitää outoa ääntä?','Windows näyttää virheilmoituksen, jota ei löydy edes Googlesta?','Minecraft-palvelin kaatuu kello kolmelta yöllä?','Discord-mikrofoni ei toimi, vaikka se on kytketty?','Selaimessasi on 47 työkalupalkkia?','Wi-Fi päätti vaihtaa alaa?','Tietokoneessa on enemmän viruksia kuin terveitä tiedostoja?','Ongelma sijaitsee näppäimistön ja tuolin välissä?'];
-var LF=['Nälkä?|Käynnistä vatsasi uudelleen.','Väsyttääkö?|Oletko kokeillut sammuttamista ja käynnistämistä uudelleen?','Rahat loppu?|RAM-muistissa ei ole enää käyttövaraa.','Sosiaaliset taidot hukassa?|Yhteys palvelimeen aikakatkaistiin.','Et saa unta?|Taustaprosesseja on käynnissä liikaa.','Unohdit, mitä olit tekemässä?|Tehtävä päättyi odottamattomasti.','Maanantaiaamu?|Kriittinen järjestelmävirhe.','Motivaatio hukassa?|Virhe 404: Motivaatiota ei löydy.','Sydän särkyi?|Tunnetukea ei ole asennettu.','Pitäisi mennä ulos?|Yhteensopivaa laitteistoa ei havaittu.','Elämä hajoaa käsiin?|Lähetä tukipyyntö. Vastausaika 3–5 työvuosisataa.','Pitäisi siivota huone?|Käyttöoikeudet puuttuvat.','Pitäisi mennä nukkumaan ajoissa?|Käyttäjä ei noudata järjestelmän suosituksia.','Oletko tehnyt koko päivän mitään?|Järjestelmä on ollut joutotilassa 14 tuntia.','Kaikki menee pieleen?|Kokeile elämän palautuspistettä vuodelta 2016.'];
-var AD=['Tarvitsetko mummon ylös haudasta?','Onko jääkaapissa vain valo?','Menikö tietokone solmuun?','Putositko elämässä Windowsin vikasietotilaan?','Tarvitsetko tekosyyn olla menemättä ulos?','Onko kahvi loppu ja elämä menettänyt merkityksensä?','Tarvitsetko teknistä tukea, parisuhdeneuvoja ja verotarkastajan karkotuksen samalla puhelulla?','Onko perjantai, mutta tuntuu maanantailta?','Tarvitsetko uuden elämän, mutta vanha Windows-tuoteavain on hukassa?','Menikö kalapuikko väärään reikään?','Onko mummo unohtanut Facebook-salasanansa?','Tarvitsetko uuden tietokoneen, mutta budjettisi on kolme euroa ja tyhjä energiajuomatölkki?','Onko naapurisi Wi-Fi nopeampi kuin sinun?','Pitäisikö sinun tehdä jotain hyödyllistä, mutta pelaat Minecraftia?','Onko elämäsi kuin Windows 98:n sininen kuolemanruutu?','Tarvitsetko uuden tekosyyn sille, miksi et ole vastannut viesteihin kolmeen viikkoon?','Onko tietokoneesi nopeampi kuin sinä aamulla?','Tarvitsetko apua ongelmaan, jota ei ole vielä edes keksitty?'];
-var PG=['AkuCleaner 1997|Poistaa väliaikaistiedostot ja viimeisetkin kärsivällisyytesi rippeet.|1,44 Mt','Life.exe|Ilmainen kokeiluversio toimivasta ihmiselämästä.|666 Kt','Internet Accelerator 3000|Ei nopeuta mitään, mutta näyttää ammattimaiselta.|3,2 Mt','Windows XP Simulator|Ilmestyy Windows 98 -sivustolle ilman lupaa.|12 Mt','Aku Antivirus|Löytää 400 uhkaa, mukaan lukien selaushistoriasi.|2,8 Mt','RAM Downloader|Lataa tietokoneellesi 16 gigatavua RAM-muistia. Tai ainakin väittää niin.|16 Gt (väitetään)','Finnish Language Pack|Muuttaa kaikki virheilmoitukset muotoon ”No voi vittu”.|420 Kt','PrinterFix.exe|Korjaa tulostimesi tai lisää ongelmia 300 prosentilla.|1,1 Mt','Motivaatio 1.0|Asennus epäonnistui: motivaatiota ei löydy.|0 tavua','AkuOS|Käyttöjärjestelmä, joka toimii vain silloin, kun Aku on paikalla.|98 Mt'];
-var HC=['Suoritin|Henkisesti loppuun palanut.','RAM|4 Mt ja unelma.','Tallennustila|500 Mt, joista 499 Mt täynnä meemejä.','Internet|Todennäköisesti yhdistetty.','Käyttöjärjestelmä|Windows 98 SE, tunnetasolla.','Käyttäjän älykkyys|Ei voitu määrittää.','Elämän tila|Käynnissä yhteensopivuusongelmista huolimatta.','Kahvin määrä|Kriittisen alhainen.','Sosiaalinen akku|1 %.','Pelaamiseen käytetty aika|Järjestelmä ei halua paljastaa tietoja.','Akun kärsivällisyys|Virheellinen arvo.','Yleinen toimintavarmuus|Riippuu kuun asennosta.'];
-var GB=['xXPori98Xx|HIENO SIVU!!! KÄYKÄÄ MINUN KOTISIVULLANI!!!|03.04.1998','Make|TIETOKONEENI SYTTYI PALAMAAN, KUN AVASIN TÄMÄN SIVUN.|09.04.1998','Ville|EKANA!!! 12.04.1998|12.04.1998','Jarmo|KORJASIN INTERNETIN LYÖMÄLLÄ MODEEMIA.|20.04.1998','Tiina|AKU KORJASI ELÄMÄNI, MUTTA NYT TULOSTIMENI ON RIIVATTU.|02.05.1998','Pori-Pete|TERVEISIÄ PORISTA. NETSCAPE KAATUI KOLME KERTAA.|14.05.1998','Anonyymi|ONKO TÄMÄ VIRUS VAI OMINAISUUS?|30.05.1998','Teemu, 14v|ÄITINI SANOI, ETTÄ PITÄISI MENNÄ ULOS.|01.06.1998','Hidas-Heikki|LATAUSNOPEUTENI ON 2 KT/S JA OLEN SIITÄ YLPEÄ.|17.06.1998','Aku|AKU HOITAA. EI LISÄKYSYMYKSIÄ.|01.01.1999'].map(function(s){return s.split('|')});
-var LK=['Akun superhieno kotisivu|Olet jo täällä. Aku on ylpeä sinusta.','Kissani henkilökohtainen kotisivu|Kissa ei ole vielä oppinut HTML:ää.','Lataa lisää RAM-muistia','Suomen virallinen perunaliitto|Perunaliitto ei vastaa. Peruna on kuuma.','ILMAISTA INTERNET-RAHAA!!!|Rahaa ei löytynyt. Internet ei ole pankki.','Ei varmasti virus.exe|Ei ollut virus. Oli pahempi: mainos.','Akun salainen animekokoelma|Pääsy evätty. Aku sanoo, ettei tällaista kokoelmaa ole.','Rakenteilla vuodesta 1998|Edelleen rakenteilla. Aku hoitaa ensi viikolla.','Korjaa elämäsi tästä','Microsoftin virallinen tunnetason asiakastuki|Tunnetaso ei ole tuettu. Kiitos soitostasi.','Mummon kotisivut','Porin epävirallinen IT-tukikeskus|Linja on varattu. Aku hoitaa sen.','Windows 98:n virallinen fanikerho|Jäseniä: 3. Kaikki ovat Aku.','Internet Explorerin viimeinen puolustaja|Viimeinen puolustaja poistui. Selain jäi.','100 % ilmainen kahvi|Kahvi on loppu. Taas.','Aku hoitaa -fanisivut|Fanisivuja: 1. Fani: Aku.','Täällä ei tapahdu mitään|Totta. Mitään ei tapahtunut.','Älä paina tätä painiketta|Sanoin, ettet paina. Nyt Aku tietää.','Olet voittanut miljoona euroa!!!|Onnittelut! Voitit 0,00 €. Verot on jo pidätetty.','TÄMÄ LINKKI KORJAA KAIKEN|Kaikki korjattu! Paitsi kaikki muu.'];
-var F=['Virhe 404: sivu on rakenteilla vuodesta 1998.','Palvelin ei vastaa. Aku on kahvilla.','Yhteys katkesi, koska joku nosti puhelimen luurin.','Ladattu 0 tavua. Tulos: onnistui.'];
-var AN=['Aku on vastaanottanut pyyntösi. Aku hoitaa. Aika-arvio: pian.','Kokeile sammuttaa ja käynnistää uudelleen. Sitten Aku. Sitten uudelleen.','Ongelma on tiedossa. Aku ei kerro sinulle sitä.','Aku on jo hoitanut tämän. Tai ainakin katsonut sitä tarkasti.','Aku on jumissa kahvitauolla. Yritä uudelleen vuonna 2004.','Älä koske mihinkään. Älä edes katso sitä. Aku hoitaa.','Aku hoitaa. Aku ei lupaa mitään. Aku ei takaa mitään.','Ongelma ratkaistu! (Aku ei nähnyt ongelmaa, mutta ratkaisi sen silti.)','Aku katsoi ongelmaasi ja se meni rikki. Nyt se on Akun ongelma.'];
-var LR=['Löytyi 1 virhe: käyttäjä.\nKorjaus: ei saatavilla.\nSuositus: kokeile elämää uudelleen huomenna.','Elämä on korjattu. Tai ainakin sen kuvake.\nKoko elämä vaatii uudelleenkäynnistyksen. Aloita maanantaina.','Virhe 0x00000AKU: motivaatiota ei löydy edes vikasietotilassa.\nHuuhtele, toista, älä kysy.','Havaittu 14 turhaa välilehteä sielussa.\nSulje ne ja lataa kahvia.','Korjaus onnistui 3 %.\nLoput 97 % lataus kesken. Odota vuoteen 2004.','Ongelma ei ole elämässä vaan siinä, että se on päällä.\nSammuta se hetkeksi. (Nuku.)'];
-var CH=['Tarkistetaan suoritinta... väsynyt','Skannataan RAM-muistia... 4 Mt ja unelma','Etsitään sosiaalista akkua... 1 %','Mitataan kahvitasoa... kriittinen','Haetaan älykkyyttä... aikakatkaisu','Analysoidaan pelaamista... pääsy evätty','Tarkistetaan Internet-yhteyttä... todennäköisesti','Kuunnellaan kuun asentoa... ei hyvä'];
-var W=['Tämä ohjelma on suorittanut luvattoman toiminnon ja suljetaan.','Fatal exception 0E at 0028:C0011E36. Aku hoitaa.','Ei tarpeeksi muistia. Sulje muutama ohjelma, esim. elämä.','Windows löysi uutta laitteistoa: Aku. Ajuria ei löydy.','Ohjelma ei vastaa. Paina mitä tahansa näppäintä. (Älä paina.)'];
-var DL=['Lataus valmis! Tiedostoa ei ole, mutta tunne on todellinen.','Lataus epäonnistui onnistuneesti.','Aku hoiti tiedoston puolestasi. Se on nyt Akun koneella.','Ladattu 0 tavua. Tallennettu: ei minnekään.'];
+const IT=['Tietokone on hidas?','Internet ei toimi?','Tulostin ei tulosta?','Poistit vahingossa System32-kansion?|Aku ei takaa tietojen säilymistä.','Unohdit salasanasi?|Aku ei tiedä salasanaasi.','Minecraft-palvelin kaatuu kello kolmelta yöllä?','Selaimessasi on 47 työkalupalkkia?','Wi-Fi päätti vaihtaa alaa?','Ongelma sijaitsee näppäimistön ja tuolin välissä?'];
+const LF=['Nälkä?|Käynnistä vatsasi uudelleen.','Rahat loppu?|RAM-muistissa ei ole enää käyttövaraa.','Sosiaaliset taidot hukassa?|Yhteys palvelimeen aikakatkaistiin.','Et saa unta?|Taustaprosesseja on käynnissä liikaa.','Maanantaiaamu?|Kriittinen järjestelmävirhe.','Motivaatio hukassa?|Virhe 404: motivaatiota ei löydy.','Pitäisi mennä ulos?|Yhteensopivaa laitteistoa ei havaittu.','Elämä hajoaa käsiin?|Lähetä tukipyyntö. Vastausaika 3–5 työvuosisataa.','Kaikki menee pieleen?|Kokeile elämän palautuspistettä vuodelta 2016.'];
+const NW=['12.4.1995|Aku asensi uuden modeemin. Internet on nyt 14 % nopeampi ja 100 % Akun ansiota.','2.4.1995|<b>UUSI!</b> Elämäntukikeskus avattu. Jonoa ei ole, koska kukaan ei löydä sitä.','28.3.1995|Vieraskirja toimii. Aku luki kaikki viestit ja ymmärsi kolme.','15.3.1995|Aku voitti Porin läänin kahvinjuontikisan. Sydän ei kommentoinut.','1.3.1995|Sivuston tausta vaihdettu harmaaksi. Aku sanoo sen olevan ”tyylikästä”.','1.1.1995|Sivusto perustettu. Aku hoiti sen yöllä, eikä muista miten.'];
+const CL=['Akun superhieno kotisivu|Olet jo täällä. Aku on ylpeä sinusta.|Olet jo täällä.','Perunaliiton virallinen sivu|Peruna on kuuma.|Perunaliitto ei vastaa. Peruna on kuuma.','Kissani henkilökohtainen kotisivu|Kissa ei osaa vielä HTML:ää.|Kissa ei ole vielä oppinut HTML:ää.','Ilmaista internet-rahaa!!!|Ei ole pankki.|Rahaa ei löytynyt. Internet ei ole pankki.','Porin epävirallinen IT-tukikeskus|Linja on aina varattu.|Linja on varattu. Aku hoitaa sen.','Mummon kotisivut|Päivitetty viimeksi: ei koskaan.|Mummo on kahvilla.'];
+const PG=['AkuCleaner 1997|Poistaa väliaikaistiedostot ja viimeisetkin kärsivällisyytesi rippeet.|1,44 Mt','Life.exe|Ilmainen kokeiluversio toimivasta ihmiselämästä.|666 Kt','Internet Accelerator 3000|Ei nopeuta mitään, mutta näyttää ammattimaiselta.|3,2 Mt','Aku Antivirus|Löytää 400 uhkaa, mukaan lukien selaushistoriasi.|2,8 Mt','RAM Downloader|Lataa tietokoneellesi 16 gigatavua RAM-muistia. Tai ainakin väittää niin.|16 Gt (väitetään)','Motivaatio 1.0|Asennus epäonnistui: motivaatiota ei löydy.|0 tavua'];
+const HC=['Suoritin|Henkisesti loppuun palanut.','RAM|4 Mt ja unelma.','Tallennustila|500 Mt, joista 499 Mt täynnä meemejä.','Käyttäjän älykkyys|Ei voitu määrittää.','Kahvin määrä|Kriittisen alhainen.','Sosiaalinen akku|1 %.'];
+const FQ=['Onko Aku oikeasti IT-asiantuntija?|Aku on asiantuntija. Siitä, mitä, ei ole sovittu.','Kuinka nopeasti Aku vastaa?|Aku vastaa viimeistään vuonna 2004.','Voinko soittaa Akulle yöllä?|Voit. Aku ei vastaa, mutta hoitaa silti.','Maksaako palvelu mitään?|Palvelu on ilmainen. Seuraukset eivät.','Mikä on Akun vahvuus?|Itseluottamus. Se riittää, kun osaaminen loppuu.'];
+const GB=['xXPori98Xx|HIENO SIVU!!! KÄYKÄÄ MINUN KOTISIVULLANI!!!|03.04.1995','Make|TIETOKONEENI SYTTYI PALAMAAN, KUN AVASIN TÄMÄN SIVUN.|09.04.1995','Ville|EKANA!!!|12.04.1995','Jarmo|KORJASIN INTERNETIN LYÖMÄLLÄ MODEEMIA.|20.04.1995','Tiina|AKU KORJASI ELÄMÄNI, MUTTA NYT TULOSTIMENI ON RIIVATTU.|02.05.1995','Hidas-Heikki|LATAUSNOPEUTENI ON 2 KT/S JA OLEN SIITÄ YLPEÄ.|17.06.1995','Aku|AKU HOITAA. EI LISÄKYSYMYKSIÄ.|01.01.1996'].map(s=>s.split('|'));
+const LK=['Rakenteilla vuodesta 1998|Edelleen rakenteilla. Aku hoitaa ensi viikolla.','Täällä ei tapahdu mitään|Totta. Mitään ei tapahtunut.','Älä paina tätä linkkiä|Sanoin, ettet paina. Nyt Aku tietää.','Olet voittanut miljoona euroa!!!|Voitit 0,00 €. Verot on jo pidätetty.','Windows 95:n virallinen fanikerho|Jäseniä: 3. Kaikki ovat Aku.','Aku hoitaa -fanisivut|Fanisivuja: 1. Fani: Aku.','100 % ilmainen kahvi|Kahvi on loppu. Taas.','Tämä linkki korjaa kaiken|Kaikki korjattu! Paitsi kaikki muu.'];
+const F=['Virhe 404: sivu on rakenteilla vuodesta 1995.','Palvelin ei vastaa. Aku on kahvilla.','Yhteys katkesi, koska joku nosti puhelimen luurin.'];
+const AN=['Aku on vastaanottanut pyyntösi. Aku hoitaa. Aika-arvio: pian.','Kokeile sammuttaa ja käynnistää uudelleen. Sitten Aku. Sitten uudelleen.','Aku on jo hoitanut tämän. Tai ainakin katsonut sitä tarkasti.','Aku katsoi ongelmaasi ja se meni rikki. Nyt se on Akun ongelma.','Ongelma ratkaistu! (Aku ei nähnyt ongelmaa, mutta ratkaisi sen silti.)'];
+const LR=['Löytyi 1 virhe: käyttäjä.\nKorjaus: ei saatavilla.','Elämä on korjattu. Tai ainakin sen kuvake.\nAloita maanantaina.','Virhe 0x00000AKU: motivaatiota ei löydy edes vikasietotilassa.','Havaittu 14 turhaa välilehteä sielussa.\nSulje ne ja lataa kahvia.'];
+const CH=['Tarkistetaan suoritinta... väsynyt','Skannataan RAM-muistia... 4 Mt ja unelma','Etsitään sosiaalista akkua... 1 %','Mitataan kahvitasoa... kriittinen','Haetaan älykkyyttä... aikakatkaisu'];
+const W=['Tämä ohjelma on suorittanut luvattoman toiminnon ja suljetaan.','Fatal exception 0E at 0028:C0011E36. Aku hoitaa.','Ei tarpeeksi muistia. Sulje muutama ohjelma, esim. elämä.'];
+const DL=['Lataus valmis! Tiedostoa ei ole, mutta tunne on todellinen.','Lataus epäonnistui onnistuneesti.','Ladattu 0 tavua. Tallennettu: ei minnekään.'];
 
-// ===== APUFUNKTIOT =====
-var $=function(i){return document.getElementById(i)};
-var R=function(a){return a[Math.floor(Math.random()*a.length)]};
-var N=function(a,b){return a+Math.floor(Math.random()*(b-a+1))};
-function S(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
+const $=i=>document.getElementById(i),R=a=>a[Math.random()*a.length|0],N=(a,b)=>a+(Math.random()*(b-a+1)|0);
+const S=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch{}return null};
+const q=s=>s.replace(/"/g,'&quot;'),L=(id,rows,f)=>{$(id).innerHTML=rows.map(r=>f(r.split('|'))).join('')};
+const dg=$('dg');dg.oncancel=e=>{if($('ok').disabled)e.preventDefault()};
+function win(t,m){$('dtt').textContent=t;$('dm').textContent=m;$('pb').style.display='none';$('ok').disabled=false;dg.open||dg.showModal()}
+function run(t,s,f){win(t,s[0]);const pb=$('pb'),ok=$('ok');let k=0;ok.disabled=true;pb.style.display='block';
+ const n=()=>{$('pf').style.width=(k+1)*100/s.length+'%';$('dm').textContent=s[k];if(++k<s.length)setTimeout(n,650);else setTimeout(()=>{pb.style.display='none';$('dm').textContent=f;ok.disabled=false},650)};n()}
+const toast=m=>{const t=$('ts');t.textContent=m;t.hidden=false;clearTimeout(t.h);t.h=setTimeout(()=>t.hidden=true,8000)};
 
-// Win98-ikkuna (tst=1: pieni ilmoitus kulmassa)
-function win(t,m,tst){
-  if(tst)document.querySelectorAll('.ov.ts').forEach(function(x){x.remove()});
-  var d=document.createElement('div');d.className='ov'+(tst?' ts':'');
-  d.innerHTML='<div class=w98><div class=tb><span></span><b>X</b></div><div class=bd><p></p><div class=pb><i></i></div><button>OK</button></div></div>';
-  d.querySelector('span').textContent=t;
-  var p=d.querySelector('p'),b=d.querySelector('button'),c=function(){d.remove()};
-  p.textContent=m;b.onclick=d.querySelector('b').onclick=c;
-  document.body.appendChild(d);
-  if(tst)setTimeout(c,10000);
-  return{p:p,bar:d.querySelector('.pb'),fill:d.querySelector('i'),btn:b};
-}
-// Feikki latausruutu: askeleet, lopputeksti
-function run(t,s,f){
-  var w=win(t,s[0]),k=0;w.btn.disabled=true;w.bar.style.display='block';
-  (function n(){
-    w.fill.style.width=(k+1)*100/s.length+'%';w.p.textContent=s[k];
-    if(++k<s.length)setTimeout(n,650);
-    else setTimeout(function(){w.bar.style.display='none';w.p.textContent=f;w.btn.disabled=false},650);
-  })();
-}
-function tb(id,rows,f){var t=$(id);rows.forEach(function(r){var tr=t.insertRow();f(r.split('|')).forEach(function(h){tr.insertCell().innerHTML=h})})}
-
-// ===== SIVUN RAKENNUS =====
-tb('it',IT,function(a){return['❓ '+a[0]+(a[1]?' <i>('+a[1]+')</i>':''),'<b class="r bk">AKU HOITAA!</b> <b class=r>❗❗</b>']});
-tb('lf',LF,function(a){return['<b>'+a[0]+'</b>','<tt>'+a[1]+'</tt>']});
-tb('hc',HC,function(a){return['<b>'+a[0]+'</b>',a[1]]});
-AD.forEach(function(s){var l=document.createElement('li');l.innerHTML=s+' <b class="r bk">AKU HOITAA!</b>';$('ad').appendChild(l)});
-document.querySelectorAll('.rb').forEach(function(e){var t=e.textContent;e.textContent='';t.split('').forEach(function(c,i){var s=document.createElement('span');s.textContent=c;s.style.animationDelay=(-i*.15)+'s';e.appendChild(s)})});
-
-// Pikseli-ikonit ja ohjelmat
-function ico(n){var c=document.createElement('canvas');c.width=c.height=8;c.className='ic';var g=c.getContext('2d'),h=n*9301+49297,col=['#f00','#00f','#0a0','#fc0','#f0f','#0cc'][n%6];
-  for(var y=0;y<8;y++)for(var x=0;x<4;x++){h=(h*233+11)%65521;if(h%3){g.fillStyle=h%5?col:'#000';g.fillRect(x,y,1,1);g.fillRect(7-x,y,1,1)}}
-  return c}
-PG.forEach(function(p,i){var a=p.split('|'),tr=$('pg').insertRow(),b=document.createElement('button');
-  tr.insertCell().appendChild(ico(i+3));
-  tr.insertCell().innerHTML='<b>'+a[0]+'</b><br>'+a[1];
-  tr.insertCell().innerHTML=a[2]+'<br>Latauksia: '+N(100,99999);
-  b.textContent='LATAA NYT!!!';
-  b.onclick=function(){run('Ladataan: '+a[0],['Yhdistetään palvelimeen...','Ladataan 2 KT/s...','Virustarkistus: löytyi selaushistoriasi','Puretaan pakettia...'],R(DL))};
-  tr.insertCell().appendChild(b)});
-
-// ===== TILA, LASKURI, KELLO =====
-function st(){$('st').textContent='AKUN TILA: '+R(ST)}st();setInterval(st,5000);$('st').onclick=st;
-var cv=1337+N(0,60),cc=0;
-function cn(){$('cnt').textContent=('0000000'+cv).slice(-8)}cn();
-setInterval(function(){cv+=N(0,3);cn()},1800);
-$('cnt').onclick=function(){if(++cc>=10){cc=0;$('sc').hidden=false;$('sc').scrollIntoView()}};
-$('sx').onclick=function(){$('sc').hidden=true};
-function ck(){var d=new Date();$('clk').textContent=d.toLocaleDateString('fi-FI')+' klo '+d.toLocaleTimeString('fi-FI')}ck();setInterval(ck,1000);
-
-// ===== VIERASKIRJA (localStorage) =====
-function gu(){try{var a=JSON.parse(S('aku_gb')||'[]');return Array.isArray(a)?a:[]}catch(e){return[]}}
-function gb(){var o=$('gl');o.textContent='';
-  gu().reverse().concat(GB).forEach(function(e){var d=document.createElement('div'),h=document.createElement('b');
-    d.className='gm';h.textContent=e[0]+' ('+e[2]+'): ';d.appendChild(h);d.appendChild(document.createTextNode(e[1]));o.appendChild(d)})}
-gb();
-$('gs').onclick=function(){var m=$('gt').value.trim().slice(0,300),u=gu();
-  if(!m){win('Virhe','Viesti puuttuu. Aku ei osaa vielä lukea ajatuksia.');return}
-  u.push([$('gn').value.trim().slice(0,30)||'Anonyymi',m,new Date().toLocaleDateString('fi-FI')]);
-  S('aku_gb',JSON.stringify(u.slice(-50)));$('gt').value='';gb()};
-
-// ===== TUKIPYYNTÖ, ELÄMÄ, TARKASTUS =====
-IT.concat(LF).forEach(function(s,i){$('fp').add(new Option((i<IT.length?'💻 ':'❤ ')+s.split('|')[0]))});
+L('nw',NW,([d,t])=>`<dt><b>${d}</b></dt><dd>${t}</dd>`);
+L('it',IT,([a,n])=>`<dt>❓ ${a}</dt><dd><a href=# class=fk data-k=1 ${n?`data-m="${q(n)}"`:''}>Aku hoitaa!</a> <b class=bk>❗❗</b>${n?` <i>(${n})</i>`:''}</dd>`);
+L('lf',LF,([a,b])=>`<dt><b>${a}</b></dt><dd><tt>${b}</tt></dd>`);
+L('cl',CL,([a,b,m])=>`<dt><a href=# class=fk data-m="${q(m)}">${a}</a></dt><dd>${b}</dd>`);
+L('pg',PG,([a,b,c])=>`<dt><b>${a}</b> (${c})</dt><dd>${b} <a href=# class=dlk data-n="${q(a)}">[Lataa]</a> <small>Latauksia: ${N(100,99999)}</small></dd>`);
+L('hc',HC,([a,b])=>`<dt><b>${a}</b></dt><dd>${b}</dd>`);
+L('fq',FQ,([a,b])=>`<dt><b>K:</b> ${a}</dt><dd><b>V:</b> ${b}</dd>`);
+L('lk',LK,([a,b])=>`<li><a href=# class=fk data-m="${q(b)}">${a}</a></li>`);
+IT.concat(LF).forEach((s,i)=>$('fp').add(new Option((i<IT.length?'💻 ':'❤ ')+s.split('|')[0])));
 $('fp').add(new Option('✨ Ongelma, jota ei ole vielä edes keksitty'));
-$('cb').onclick=function(){$('fm').hidden=false;$('fm').scrollIntoView()};
-$('fs').onclick=function(){var n=$('fn').value.trim();
-  run('Soitetaan Akulle...',['Tuut... tuut...','Aku ei vastaa, hän hoitaa jotain.','Yhdistetään Akun vastaajaan...','Aku vastaa!'],
-  'Hei '+(n||'tuntematon käyttäjä')+'!\n\nOngelma: '+$('fp').value+'\n\nAkun vastaus: '+R(AN))};
-$('lb').onclick=function(){run('KORJATAAN ELÄMÄÄ...',['Etsitään elämää...','Löytyi: 1 kpl (vioittunut)','Ladataan motivaatiota... 0 %','Yritetään uudelleen... 0 %','Kysytään Akulta...'],'VIANMÄÄRITYSRAPORTTI\n\n'+R(LR))};
-$('hb').onclick=function(){var c=CH.slice().sort(function(){return Math.random()-.5}).slice(0,6);
-  run('Järjestelmän tarkastus',c,'TARKASTUS VALMIS!\n\n'+N(2,9)+' vakavaa ongelmaa löydetty.\n'+N(10,99)+' epäilyttävää prosessia havaittu.\nKahvi loppumassa.\nMotivaatio puuttuu.\nElämä toimii yhteensopivuustilassa.\n\nSUOSITUS: Käynnistä käyttäjä uudelleen ja ota yhteyttä Akuun.')};
+const wp=()=>$('wp').textContent=R(IT).split('|')[0];wp();
 
-// ===== LINKIT EI-MIHINKÄÄN =====
-LK.forEach(function(s){var p=s.split('|'),l=document.createElement('li'),a=document.createElement('a');
-  a.href='#';a.className='fk';a.textContent=p[0];if(p[1])a.dataset.m=p[1];l.appendChild(a);$('lk').appendChild(l)});
-document.addEventListener('click',function(e){
-  var a=e.target.closest?e.target.closest('a'):null;
-  if(a&&a.classList.contains('n')){e.preventDefault();$(a.getAttribute('href').slice(1)).scrollIntoView()}
-  else if(a&&a.classList.contains('fk')){e.preventDefault();a.classList.add('v');var m=a.dataset.m||R(F);
-    if(Math.random()<.5)run('Avataan: '+a.textContent,['Soitetaan palvelimelle...','Odotetaan vastausta...','Ladataan 3 %...'],m);else win('Virhe 404',m)}
-  else if(e.target.tagName=='BUTTON'&&Math.random()<.12)setTimeout(function(){win('AKU HOITAA','AKU HOITAA TÄMÄNKIN',1)},900);
-});
+let cv=1337+N(0,60),cc=0;const cn=()=>$('cnt').textContent=String(cv).padStart(8,'0');cn();
+setInterval(()=>{cv+=N(0,3);cn()},1800);
+$('cnt').onclick=()=>{if(++cc>=10){cc=0;$('sc').hidden=false;$('sc').scrollIntoView()}};
+$('sx').onclick=()=>$('sc').hidden=true;
+const ck=()=>{const d=new Date();$('clk').textContent=d.toLocaleDateString('fi-FI')+' klo '+d.toLocaleTimeString('fi-FI')};ck();setInterval(ck,1000);
 
-// ===== TEE SIVUSTOSTA VIELÄ HUONOMPI =====
-function ug(){var b=document.body,d=document.createElement('span'),x=document.querySelectorAll('.b');
-  d.className='dc';d.textContent=R(['💾','📠','🖥️','⭐','🔥','📧','💿','👾','🌈','⚠️','🚧','☎️','💥']);
-  d.style.cssText='left:'+N(0,92)+'%;top:'+N(40,Math.max(100,b.scrollHeight-60))+'px;font-size:'+N(18,60)+'px;animation:'+R(['sp','bn','bl'])+' '+N(5,20)/10+'s '+R(['linear','steps(5)'])+' infinite';
-  b.appendChild(d);
-  x[N(0,x.length-1)].style.background=R(['#f0f','#0f0','#ff0','#0ff','#f80','#f66','#9f9']);
-  b.style.backgroundColor=R(['#f00','#0a0','#80f','#f0f','#00f','#f80']);
-  b.style.fontFamily='"'+R(['Comic Sans MS','Impact','Courier New','Papyrus','Arial Black'])+'",cursive'}
-$('ub').onclick=function(){ug();S('aku_ug',String((+S('aku_ug')||0)+1))};
-$('ur').onclick=function(){S('aku_ug','0');location.reload()};
-setTimeout(function(){for(var i=0,n=Math.min(+S('aku_ug')||0,40);i<n;i++)ug()},400);
+const gu=()=>{try{const a=JSON.parse(S('aku_gb')||'[]');return Array.isArray(a)?a:[]}catch{return[]}};
+function gb(){const o=$('gl');o.textContent='';[...gu()].reverse().concat(GB).forEach(([n,m,d])=>{const e=document.createElement('div'),h=document.createElement('b');e.className='gm';h.textContent=`${n} (${d}): `;e.append(h,m);o.append(e)})}gb();
+$('gs').onclick=()=>{const m=$('gt').value.trim().slice(0,300),u=gu();
+ if(!m)return win('Virhe','Viesti puuttuu. Aku ei osaa vielä lukea ajatuksia.');
+ u.push([$('gn').value.trim().slice(0,30)||'Anonyymi',m,new Date().toLocaleDateString('fi-FI')]);S('aku_gb',JSON.stringify(u.slice(-50)));$('gt').value='';gb()};
 
-// ===== MODEEMIN ÄÄNI (vain napista) =====
-$('sd').onclick=function(){try{
-  var c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain(),t=c.currentTime,i;
-  o.type='square';g.gain.value=.04;o.connect(g);g.connect(c.destination);
-  for(i=0;i<40;i++)o.frequency.setValueAtTime(i<8?[697,1209,770,1336][i%4]:i<14?[2100,1300,2250][i%3]:900+Math.random()*2400,t+i*.1);
-  o.start(t);o.stop(t+4);
-}catch(e){win('Äänikortti','Äänikorttia ei löydy. Aku hoitaa.')}};
+$('fs').onclick=()=>run('Soitetaan Akulle...',['Tuut... tuut...','Aku ei vastaa, hän hoitaa jotain.','Yhdistetään Akun vastaajaan...','Aku vastaa!'],`Hei ${$('fn').value.trim()||'tuntematon käyttäjä'}!\n\nOngelma: ${$('fp').value}\n\nAkun vastaus: ${R(AN)}`);
+$('lb').onclick=()=>run('Korjataan elämää...',['Etsitään elämää...','Löytyi: 1 kpl (vioittunut)','Ladataan motivaatiota... 0 %','Kysytään Akulta...'],'Vianmääritysraportti\n\n'+R(LR));
+$('hb').onclick=()=>run('Järjestelmän tarkastus',[...CH].sort(()=>Math.random()-.5),`Tarkastus valmis!\n\n${N(2,9)} vakavaa ongelmaa löydetty.\n${N(10,99)} epäilyttävää prosessia havaittu.\nKahvi loppumassa.\n\nSuositus: käynnistä käyttäjä uudelleen ja ota yhteyttä Akuun.`);
 
-// ===== MP3-SOITIN =====
-var mt=[{n:'Aku Hoitaa',u:'Biisi/Aku-Hoitaa.mp3'}],mi=0,mo=0,mc=null,mg=null,ms=null;
-function mUI(t){$('pt').textContent=t;$('pp').textContent=mo==1?'⏸':'▶'}
-function mInit(){if(!mc){mc=new(window.AudioContext||window.webkitAudioContext)();mg=mc.createGain();mg.gain.value=$('pv').value/100;mg.connect(mc.destination)}if(mc.state=='suspended')mc.resume()}
-function mStop(){if(ms){ms.onended=null;try{ms.stop()}catch(e){}ms=null}}
-function mLoad(k,cb){var t=mt[k],q;
-  if(t.b)return cb(t.b);
-  q=fetch(t.u).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer()});
-  q.then(function(a){return mc.decodeAudioData(a)}).then(function(b){t.b=b;cb(b)}).catch(function(){mo=0;mUI('■ Virhe');win('Virhe','Raitaa ei voitu ladata: '+t.n+'\nAvaa sivu palvelimelta.')})}
-function mGo(k){mInit();mStop();mi=k;mo=1;mUI('⏳ '+mt[k].n);
-  mLoad(k,function(b){if(mi!=k||mo!=1||ms)return;
-    var s=mc.createBufferSource();s.buffer=b;s.connect(mg);ms=s;
-    s.loop=true;
-    s.start();mUI('🎵 '+mt[k].n)})}
-$('pp').onclick=function(){mInit();
-  if(mo==1){mc.suspend();mo=2;mUI('⏸ '+mt[mi].n)}
-  else if(mo==2&&ms){mo=1;mUI('🎵 '+mt[mi].n)}
-  else mGo(mi)};
-$('ps').onclick=function(){mStop();mo=0;if(mc)mc.resume();mUI('■ Pysäytetty')};
-$('pv').value=S('aku_vol')||40;
-$('pv').oninput=function(){if(mg)mg.gain.value=this.value/100;S('aku_vol',this.value)};
-mUI('Aku Hoitaa');
+document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;
+ if(a.classList.contains('fk')){e.preventDefault();a.classList.add('v');const m=a.dataset.m||R(a.dataset.k?AN:F);Math.random()<.5?run('Avataan: '+a.textContent.trim(),['Soitetaan palvelimelle...','Odotetaan vastausta...','Ladataan 3 %...'],m):win('Virhe 404',m)}
+ else if(a.classList.contains('dlk')){e.preventDefault();run('Ladataan: '+a.dataset.n,['Yhdistetään palvelimeen...','Ladataan 2 KT/s...','Virustarkistus: löytyi selaushistoriasi','Puretaan pakettia...'],R(DL))}
+ else if(a.id=='cb'){e.preventDefault();$('fm').hidden=false;$('fm').scrollIntoView({block:'center'})}
+ else if(a.id=='wn'){e.preventDefault();wp()}});
+addEventListener('hashchange',()=>$('url').value='http://www.aku.hoitaa.fi/'+location.hash);
 
-// ===== SATUNNAISET ILMOITUKSET JA MODEEMIN YHDISTYS =====
-function rp(){var k=N(0,2);
-  if(k==0)win('Ilmoitus','AKU ON TÄLLÄ HETKELLÄ KORJAAMASSA INTERNETIÄ. PALAATHAN VUONNA 2004.',1);
-  else if(k==1)win('AKU HOITAA','AKU HOITAA TÄMÄNKIN',1);
-  else win('Windows',R(W),1);
-  setTimeout(rp,N(15000,35000))}
-setTimeout(rp,9000);
+const ugl=()=>{document.body.classList.toggle('u');S('aku_u',document.body.classList.contains('u')?'1':'')};
+$('ug').onclick=ugl;if(S('aku_u'))document.body.classList.add('u');
+$('sd').onclick=()=>{try{const c=new(window.AudioContext||webkitAudioContext)(),o=c.createOscillator(),g=c.createGain(),t=c.currentTime;
+ o.type='square';g.gain.value=.04;o.connect(g);g.connect(c.destination);
+ for(let i=0;i<40;i++)o.frequency.setValueAtTime(i<8?[697,1209,770,1336][i%4]:i<14?[2100,1300,2250][i%3]:900+Math.random()*2400,t+i*.1);
+ o.start(t);o.stop(t+4)}catch{win('Äänikortti','Äänikorttia ei löydy. Aku hoitaa.')}};
+
+const trk='Biisi/Aku-Hoitaa.mp3';let mc,mg,ms,mb,mo=0;
+const mu=t=>{$('pt').textContent=t;$('pp').textContent=mo==1?'⏸':'▶'};
+const mi=()=>{if(!mc){mc=new(window.AudioContext||webkitAudioContext)();mg=mc.createGain();mg.gain.value=$('pv').value/100;mg.connect(mc.destination)}if(mc.state=='suspended')mc.resume()};
+const mx=()=>{if(ms){ms.onended=null;try{ms.stop()}catch{}ms=null}};
+async function go(){mi();mx();mo=1;mu('⏳ Aku Hoitaa');
+ try{mb??=await mc.decodeAudioData(await(await fetch(trk)).arrayBuffer());if(mo!=1||ms)return;ms=mc.createBufferSource();ms.buffer=mb;ms.loop=true;ms.connect(mg);ms.start();mu('🎵 Aku Hoitaa')}
+ catch{mo=0;mu('■ Virhe');win('Virhe','Raitaa ei voitu ladata: Aku Hoitaa\nAvaa sivu palvelimelta.')}}
+$('pp').onclick=()=>{mi();if(mo==1){mc.suspend();mo=2;mu('⏸ Aku Hoitaa')}else if(mo==2&&ms){mc.resume();mo=1;mu('🎵 Aku Hoitaa')}else go()};
+$('ps').onclick=()=>{mx();mo=0;mc?.resume();mu('■ Pysäytetty')};
+$('pv').value=S('aku_vol')||40;$('pv').oninput=e=>{if(mg)mg.gain.value=e.target.value/100;S('aku_vol',e.target.value)};mu('Aku Hoitaa');
+
+const SO=['Aku Cloud™|Pilvi on Akun kaverin palvelin. Kaveri on lomalla.|Beta','Aku Security Suite|Salasana on salasana. Vahvistettu: salasana1.|Vakaa','Aku AI|Aku Inhimillinen. Vastaa kaikkeen itsevarmasti. Joskus oikein.|Ennakko','Aku Backup|Varmuuskopio on ajatus. Ajatus on Akun päässä.|Pysyvä','Aku DevOps|Dev: Aku. Ops: Aku. Käyttöönotto perjantaisin klo 16.59.|Rohkea'];
+const PR=['Aku Perus|0 €/kk|Aku katsoo ongelmaasi.|Aku yrittää','Aku Pro|49 €/kk|Aku katsoo ongelmaasi kahdesti ja ääneen.|99,9 % (pyöristettynä)|hl','Aku Enterprise|Soita (Aku ei vastaa)|Aku katsoo, nyökkää ja laskuttaa.|Aku hoitaa'];
+const CS=['Vaasan Kalatukku Oy|Haaste: Excel kaatuu. Ratkaisu: Aku katsoi Exceliä. Excel kaatuu yhä, mutta nyt valvotusti.|ROI −212 %','Porin Mummola ry|Haaste: Facebook-salasana hukassa. Ratkaisu: Aku katsoi salasanaa. Salasana katsoi takaisin.|tyytyväisyys 100 %, ROI −40 %','Kokkolan kaupunki|Haaste: tulostin. Ratkaisu: Aku käveli tulostimen luo. Tulostin toimii yhä. Henkilökunta ei.|ROI −9000 %'];
+const PN=['14.10.2026|Aku ilmoittaa strategisen kumppanuuden itsensä kanssa.','2.10.2026|Aku Enterprise Solutions saavutti 100 % asiakastyytyväisyyden (otos: Aku).','30.9.2026|Q3-tulos: kahvia kului 140 litraa, ongelmia ratkaistiin 0. Aku pitää tulosta erinomaisena.'];
+const JB=['Aku (senior)|Olla Aku. Vähintään 10 vuoden kokemus Akuna.|Kokemus','Chief Vibes Officer|Tunnelma. Ei muuta.|Tunnelma','Harjoittelija|Ei kokemusta, eikä sitä kerry.|Kahvi'];
+const KF=['Liikevaihto|0 €','Henkilöstö|1 (Aku)','Kahvikulut|112 % liikevaihdosta','Osinko|Kahvi'];
+const ET=['Aku ei takaa mitään.|Tämä koskee myös tätä kohtaa.','Vastuunrajoitus|Jos jokin menee rikki, se oli jo rikki. Jos ei ollut, Aku katsoi sitä.','Tietosuoja|Aku ei lue viestejäsi. Aku vain katsoo niitä todella tarkasti.','Sovellettava laki|Akun oma. Tuomioistuin: Akun olohuone.'];
+const SV=['Aku-pilvi','Aku-sähköposti','Aku-VPN','Aku-tuki','Aku-AI','Aku-tietoturva'],SS=['🟢 Toimii','🟡 Heikentynyt','🔴 Aku katsoo sitä','⚫ Aku ei tiedä'],dt2=([d,t])=>`<dt><b>${d}</b></dt><dd>${t}</dd>`,stf=()=>L('stt',SV.map(s=>s+'|'+R(SS)),([a,b])=>`<tr><td>${a}</td><td>${b}</td></tr>`);
+L('sl',SO,([a,b,c])=>`<tr><td><b>${a}</b></td><td>${b}</td><td>${c}</td></tr>`);L('pr',PR,([a,b,c,d,h])=>`<tr${h?' class=hl':''}><td><b>${a}</b></td><td>${b}</td><td>${c}</td><td>${d}</td></tr>`);L('cs',CS,([a,b,c])=>`<dt><b>${a}</b></dt><dd>${b} <i>Tulos: ${c}.</i></dd>`);L('pn',PN,dt2);L('kf',KF,dt2);L('et',ET,dt2);L('jb',JB,([a,b,c])=>`<tr><td><b>${a}</b></td><td>${b}</td><td>${c}</td><td><a href=# class=jb data-n='${a}'>Hae</a></td></tr>`);stf();setInterval(stf,6000);
+const PH=[];let px=.42;const dr=()=>{px=Math.max(.01,px+(Math.random()-.5)*.06);PH.push(px);if(PH.length>64)PH.shift();const c=$('skc').getContext('2d'),w=c.canvas.width,h=c.canvas.height,hi=Math.max(...PH),lo=Math.min(...PH),up=px>=PH[0];c.clearRect(0,0,w,h);c.strokeStyle=up?'#0f0':'#f33';c.beginPath();PH.forEach((v,i)=>{const x=i*w/63,y=h-4-(v-lo)/(hi-lo||1)*(h-8);i?c.lineTo(x,y):c.moveTo(x,y)});c.stroke();$('spx').textContent=`AKU ${px.toFixed(2).replace('.',',')} € ${up?'▲':'▼'}`};for(let i=0;i<40;i++)dr();setInterval(dr,1500);
+$('rb').onclick=()=>{const n=Math.max(1,+$('rn').value||1);run('Aku ROI-laskuri',['Syötetään lukuja...','Kysytään Akulta...','Pyöristetään suotuisasti...'],`Henkilöstö: ${n}\nArvioitu vuosisäästö: −${n*N(120,900)} €\nTakaisinmaksuaika: ei koskaan\nROI: −${N(100,999)} %\n\nSuositus: osta Aku Enterprise.`)};
+$('nb').onclick=()=>$('ne').value.includes('@')?run('Uutiskirje',['Lisätään postituslistalle...','Tarkistetaan osoite...'],'Kiitos tilauksesta!\nUutiskirje ilmestyy, kun Aku muistaa. Todennäköisesti ei koskaan.'):win('Virhe','Osoitteesta puuttuu @-merkki. Aku etsi sitä kaksi tuntia.');
+document.querySelectorAll('.ckb').forEach(b=>b.onclick=()=>toast('Evästeet hyväksytty. Aku söi ne jo.'));
+document.addEventListener('click',e=>{const a=e.target.closest('a.jb');if(a){e.preventDefault();run('Hakemus: '+a.dataset.n,['Lähetetään CV:tä...','CV katosi.','Aku löysi CV:n toisesta ulottuvuudesta...'],R(['Hakemus vastaanotettu. Aku hoitaa. Vastaus: ei koskaan.','Olet valittu! Aloituspäivä: eilen. Palkka: kokemus.','Aku katsoi hakemustasi. Se meni rikki.']))}});
+const CAT=['🏷️|Viikon tarjoukset','💻|Tietotekniikka','☕|Kahvinkeittimet','📱|Puhelimet ja älykellot','📺|TV ja ääni','🎮|Gaming','🔌|Komponentit','🔑|Salasanat','🧓|Mummon IT','🗑️|Outlet'],
+SL=['Sopiva <b>Aku-palvelin</b> jokaiseen kotiin|Kerran Aku, aina Aku.|#7a0f26|#b3122f|🖥️','Uusi <b>Aku AI</b> ajattelee puolestasi|Ei takuuta ajatuksille.|#0b5a3a|#1a8a5a|🤖','<b>Aku Cloud</b> alkaen 0 €/kk|Pilvi on lomalla.|#3b2a8a|#5a43c8|☁️'],
+PT=['Syksyn parhaat <b>diilit</b>|#0a1d7a|#b6ff00','Säästä <b>500 €</b> Aku-kannettavasta|#1a4fd0|#fff','Extra −10 % outlet-<b>kahvikoneista</b>*|#ffd400|#111','<b>1000 €</b> alennus keittiöstä*|#c8d8f8|#0a1d7a'],
+DD=['Aku Phone A18 LTE 4/128 GB (musta)|179|269|90|📱','Aku Laptop 15, RAM 4 Mt|499|999|500|💻','Aku älytelevisio 43 tuumaa (1998)|199|499|300|📺','Aku Kahvinkeitin Pro|599|699|100|☕'],
+KB=['Aku Pesukone F4 (11 kg)|299|649|🧺','Aku-ruukkukasvi (sis. 1 bugin)|41,99|52,99|🪴','Aku-bonsai-palvelin|39,99|52,99|🌳','Aku-palikka (1 kpl)|12,99|18,99|🧱'],
+IB=['Aku-klubi|🏠','Live-myyjä|🎥','50 päivän palautusoikeus|↩️','Varaa ja nouda|🛍️','Asiakaspalvelu|🎧'],
+AR=['Outlet|Hyväkuntoisia palautus- ja esittelytuotteita jopa −50 %. Normaali takuu!|🛒','Aku-lahjakortti|Lahjakortti netistä on täydellinen lahja lähimmäiselle.|🎁','Sinulle sopiva puhelinliittymä|Aku myy liittymää, jolla ei ole kenttää.|📶','Aku-klubi|Liity ja saa parhaat edut. Kuten ei mitään.|⭐'],
+BZ=['Henkilökohtainen neuvonta|Akun yritysmyynti auttaa. Tai katsoo.|💼','Leasing – IT-laitteiden vuokraus|Rikkoutuminen on jonkun muun ongelma.|🧾','Suuret projektit|Tarjoamme vankkaa kokemusta ja Akun.|🏗️','Maksu ja rahoitus|Maksa myöhemmin. Mieluiten vuonna 2031.|💳'];
+const M=(a,f)=>a.map(r=>f(r.split('|'))).join(''),fkl=(t,m)=>`<a href=# class=fk data-m='${m}'>${t}</a>`,
+pc=(n,p,o,s,e,k)=>`<div><small>⚖ Vertaile ♡</small><em>${e}</em><small>Saatavilla eri vaihtoehtoja</small><b>${n}</b><span>★★★★☆ (${N(1,999)})</span><i>${k?'KLUBIHINTA':'SÄÄSTÄ '+s+' €'}</i><strong>${p} €</strong><small>${k?'ilman jäsenyyttä':'Norm.'} ${o} €</small><small class=gn>100+ kpl saatavilla verkkokaupasta</small></div>`,
+nv=(t,b)=>`<div class=nv><h2>${t}</h2>${b}</div>`,lk2=a=>a.map(x=>fkl(x,'Sivu on rakenteilla vuodesta 1995.')).join('');
+$('ha').innerHTML=`<div class=tp><span>Asiakaspalvelu <b>Yksityisasiakas</b> Yritysasiakas</span><span>Minun suosikit ♡</span></div><div class=hd><svg viewBox='0 0 54 54'><path d='M27 2l22 13v24L27 52 5 39V15z' fill=#0a1d7a /><text x=27 y=37 font-size=28 font-weight=bold font-family=Arial text-anchor=middle fill=#b6ff00>A</text></svg><span class=lg>AKU</span><button>☰ Kategoriat</button><input id=q26 placeholder='Hae tuotteita, kategorioita tai artikkeleita'>${fkl('📍<br>Etsi lähin myymälä','Lähin myymälä on Akun olohuone.')}${fkl('👤<br>Kirjaudu','Salasana on salasana.')}${fkl('🛒<br>Ostoskori','Ostoskori on tyhjä. Aku osti kaiken.')}</div><div class=ct>${M(CAT,([e,t])=>fkl(`<i>${e}</i>${t}`,'Kategoria on tyhjä. Aku katsoi sitä.'))}</div><div class=hr6 id=hs></div><p class=dots id=hd></p><div class=pt4>${M(PT,([t,c,k])=>`<a href=# class=fk style='background:${c};color:${k}'>${t}</a>`)}</div><div class=bnr><h2>Tee diili. Pelaa rauhassa.</h2><p>Valmistaudu Aku-päivitykseen tekemällä pelirauhasopimus. Saat 10 % alennusta tietokoneista, joita ei ole.</p><button class='pill g'>Tee diili</button></div>${nv('Viikon parhaat diilit',`<div class=cd>${M(DD,([n,p,o,s,e])=>pc(n,p,o,s,e,0))}</div>`)}<h2 class=kt>Viikon klubitarjoukset:</h2><div class=cd>${M(KB,([n,p,o,e])=>pc(n,p,o,0,e,1))}</div><a href=# class='fk cht' data-m='Chat-botti on kahvilla.'>Aloita chat 💬</a>`;
+$('hz').innerHTML=`<div class=nv><div class=ib>${M(IB,([t,e])=>`<span><i>${e}</i>${t}</span>`)}</div></div>${nv('Ajankohtaiset artikkelit',`<div class=ar>${M(AR,([t,x,e])=>`<div><em>${e}</em><b>${t}</b><span>${x}</span><button class=pill>Lue lisää</button></div>`)}</div>`)}${nv('Ajankohtaista yrityksille',`<div class=ar>${M(BZ,([t,x,e])=>`<div><em>${e}</em><b>${t}</b><span>${x}</span><button class=pill>Lue lisää</button></div>`)}</div>`)}<div class=ft><div class=fc><div><h4>Asiakaspalvelu</h4>${lk2(['Huolto ja tuki','Usein kysyttyä','Maksutavat','Yritykset','Black Friday'])}</div><div><h4>Tietoa Akusta</h4>${lk2(['Avoimet työpaikat','Vastuullisuus','Evästeet','Tietosuojaseloste','Käyttöehdot'])}</div></div><p class=lg>AKU</p><small>©2026 Aku Enterprise Solutions Oy | Akun olohuone, Pori | Kaikki oikeudet pidätetään. <a href=# id=b95>Palaa vuoteen 1995</a></small></div>`;
+let hn=0;const hg=()=>{const[t,s,c,d,e]=SL[hn].split('|'),h=$('hs');h.style.background=c;h.innerHTML=`<div><big>${t}</big><span>${s}</span><button class='pill y'>Lue lisää</button></div><em style='background:${d}'>${e}</em>`;$('hd').textContent=SL.map((_,i)=>i==hn?'●':'○').join(' ')};hg();
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>{hn=(hn+1)%SL.length;hg()},4500);
+const nu=$('url');nu.readOnly=false;nu.spellcheck=false;nu.autocomplete='off';
+const sw=v=>{const t=document.body.classList;if(v.includes('2026')){t.add('t26');nu.value='http://www.aku.hoitaa.fi/2026';scrollTo(0,0);win('Tervetuloa vuoteen 2026','Selaimesi päivitettiin vuodesta 1995.\nLadattu 4,2 Gt evästeitä.\n\nPalaa menneeseen kirjoittamalla Netsiteen 1995.')}else if(v.includes('1995')){t.remove('t26');nu.value='http://www.aku.hoitaa.fi/';scrollTo(0,0);win('Netscape','Palattiin vuoteen 1995. Modeemi sihisee.')}else{win('Netscape','Osoitetta ei löytynyt:\n'+v);nu.value='http://www.aku.hoitaa.fi/'+location.hash}};
+nu.onkeydown=e=>{if(e.key=='Enter')sw(nu.value.trim())};
+$('q26').onkeydown=e=>{if(e.key=='Enter')run('Haku',['Haetaan...','Skannataan Akun mieltä...'],`Haulla ${e.target.value} löytyi 0 tulosta.\nAku katsoi, mutta ei löytänyt.`)};
+document.addEventListener('click',e=>{if(e.target.closest('.pill,.hd button'))toast('Painike on rakenteilla vuodesta 1995.');if(e.target.id=='b95'){e.preventDefault();sw('1995')}});
+const rp=()=>{toast(R(['AKU ON KORJAAMASSA INTERNETIÄ. PALAA VUONNA 2004.','AKU HOITAA TÄMÄNKIN',...W]));setTimeout(rp,N(15000,35000))};setTimeout(rp,9000);
 run('Verkkoyhteys',['Alustetaan modeemia...','Soitetaan numeroon 0100 9999...','Odotetaan kättelyä...','Tarkistetaan tunnusta ja salasanaa...','Yhdistetty nopeudella 28800 bps'],'YHTEYS MUODOSTETTU!\nTervetuloa Akun kotisivuille. Älä sammuta modeemia.');
-</script>
-</body>
-</html>
+</script></body></html>
